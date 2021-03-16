@@ -10,18 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Utilisateur
 {
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Sortie", mappedBy="organisateur")
-     */
-    private $sortiesOrganisees;
-
-
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Site", inversedBy="utilisateurs")
-     */
-    private $site;
+    public function __toString():string{
+        return $this->getNom();
+    }
 
     /**
      * @ORM\Id
@@ -29,6 +20,17 @@ class Utilisateur
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Sortie", mappedBy="organisateur")
+     */
+    private $sortiesOrganisees;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Site", inversedBy="utilisateurs")
+     */
+    private $site;
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -171,20 +173,30 @@ class Utilisateur
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
+
     public function getSortiesOrganisees()
     {
         return $this->sortiesOrganisees;
     }
 
-    /**
-     * @param mixed $sortiesOrganisees
-     */
-    public function setSortiesOrganisees($sortiesOrganisees): void
+
+    public function setSortiesOrganisees($sortiesOrganisees)
     {
         $this->sortiesOrganisees = $sortiesOrganisees;
+        return $this;
+    }
+
+
+    public function getSite()
+    {
+        return $this->site;
+    }
+
+
+    public function setSite($site)
+    {
+        $this->site = $site;
+        return $this;
     }
 
 
