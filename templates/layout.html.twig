@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+    /** Gestion des polices
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,400;0,900;1,200;1,400;1,900&display=swap" rel="stylesheet">
+    /** Import de Bootstrap
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+                    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    /** Import favicon
+    <link rel="icon" href="{{ asset('images/abeille.png') }}">
+    /** Lien vers fichier de styles
+    <link rel="stylesheet" href="{{ asset('style.css') }}">
+    {% block stylesheets %}
+        {#{{ encore_entry_link_tags('app') }}#}
+    {% endblock %}
+
+    {% block javascripts %}
+        {#{{ encore_entry_script_tags('app') }}#}
+    {% endblock %}
+</head>
+<body>
+<div class="Page">
+    <nav {% block nav %} class="Navbar Page_Nav">
+        <h1 class="Title Navbar_Title">
+            <a href="{{ url('accueil') }}" class="Link Title_Link Navbar_Link">
+                <img src="{{ asset('images/logoAbeille.png') }}" alt="groupe_6_logo" class="Logo Title_Logo">
+
+            </a>
+        </h1>
+
+        <ul class="Menu Navbar_Menu">
+
+            /** TO DO : RENOMMER URL
+
+            <li class="Menu_Item">
+                <a href="{{ url('acceuil') }}" class="Link Menu_Link Navbar_Link">Accueil</a>
+            </li>
+            <li class="Menu_Item">
+                <a href="{{ url('profil') }}" class="Link Menu_Link Navbar_Link">Mon profil</a>
+            </li>
+            <li class="Menu_Item">
+                <a href="{{ url('connexion') }}" class="Link Menu_Link Navbar_Link">Se déconnecter</a>
+            </li>
+        </ul>
+    {% endblock %}</nav>
+
+    <header> {% block header %} {% endblock%}  </header>
+
+
+    <div class="Page_Contents">
+        <main class="Page_Main">
+            {% for type, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="flash flash-{{ type }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+
+            {% block main %}
+            {% endblock %}
+        </main>
+    </div>
+    <footer class="Footer Page_Footer"> {% block footer %}
+        <p class="Copyrights">
+            &copy; Sortir date("Y")
+        </p>
+        <p>
+            By Rouat Typhaine, Le Mauff Jianying, Soyeux Timothee, Robert Pascal.   [<a href="https://github.com/typhaineRouat/projet-sortir-groupe-6.git">CC BY-SA 3.0</a>],
+        </p>
+        {% endblock %}
+    </footer>
+
+</div>
+</body>
+</html>
