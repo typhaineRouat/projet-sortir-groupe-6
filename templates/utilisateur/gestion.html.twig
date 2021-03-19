@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+{% block nav %}{% endblock %}
+{% block main %}
+    <h1>Mon profil</h1>
+    {% form_theme utilisateurForm 'bootstrap_4_layout.html.twig' %}
+
+    {{ form_start(utilisateurForm) }}
+    {{ form_widget(utilisateurForm) }}
+
+    <button>Enregister</button>
+    <button>Annuler</button>
+
+    {{ form_end(utilisateurForm) }}
+    <p>Bonjour {{ utilisateur.getNom }}</p>
+
+{% endblock %}

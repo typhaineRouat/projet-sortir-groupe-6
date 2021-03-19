@@ -10,6 +10,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Sortie
 {
+
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Lieu", inversedBy="sortiesLieu")
      */
@@ -36,12 +44,6 @@ class Sortie
      */
     private $etat;
 
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -150,20 +152,69 @@ class Sortie
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
+
     public function getLieu()
     {
         return $this->lieu;
     }
 
-    /**
-     * @param mixed $lieu
-     */
-    public function setLieu($lieu): void
+
+    public function setLieu($lieu)
     {
         $this->lieu = $lieu;
+        return $this;
+    }
+
+
+    public function getSiteOrga()
+    {
+        return $this->SiteOrga;
+    }
+
+
+    public function setSiteOrga($SiteOrga)
+    {
+        $this->SiteOrga = $SiteOrga;
+        return $this;
+    }
+
+
+    public function getOrganisateur()
+    {
+        return $this->organisateur;
+    }
+
+
+    public function setOrganisateur($organisateur)
+    {
+        $this->organisateur = $organisateur;
+        return $this;
+    }
+
+
+    public function getParticipants()
+    {
+        return $this->participants;
+    }
+
+
+    public function setParticipants($participants)
+    {
+        $this->participants = $participants;
+        return $this;
+    }
+
+
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+        return $this;
     }
 
 

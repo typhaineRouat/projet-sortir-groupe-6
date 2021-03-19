@@ -24,10 +24,10 @@
     {% endblock %}
 </head>
 <body>
-<div class="Page">
-    <nav {% block nav %} class="Navbar Page_Nav">
+<div class="Page container">
+    <!--  {% block nav %}<nav  class="Navbar Page_Nav">
         <h1 class="Title Navbar_Title">
-            <a href="{{ url('accueil') }}" class="Link Title_Link Navbar_Link">
+            <a href="{{ path('utilisateur_gestion') }}" class="Link Title_Link Navbar_Link">
                 <img src="{{ asset('images/logoAbeille.png') }}" alt="groupe_6_logo" class="Logo Title_Logo">
 
             </a>
@@ -38,37 +38,38 @@
             /** TO DO : RENOMMER URL
 
             <li class="Menu_Item">
-                <a href="{{ url('acceuil') }}" class="Link Menu_Link Navbar_Link">Accueil</a>
+                <a href="{{ path('accueil') }}" class="Link Menu_Link Navbar_Link">Accueil</a>
             </li>
             <li class="Menu_Item">
-                <a href="{{ url('profil') }}" class="Link Menu_Link Navbar_Link">Mon profil</a>
+                <a href="{{ path('profil') }}" class="Link Menu_Link Navbar_Link">Mon profil</a>
             </li>
             <li class="Menu_Item">
-                <a href="{{ url('connexion') }}" class="Link Menu_Link Navbar_Link">Se déconnecter</a>
+                <a href="{{ path('connexion') }}" class="Link Menu_Link Navbar_Link">Se déconnecter</a>
             </li>
         </ul>
     {% endblock %}</nav>
-
+    <div class="container">
     <header> {% block header %} {% endblock%}  </header>
 
+-->
+
+    {% block main %}
 
     <div class="Page_Contents">
-        <main class="Page_Main">
-            {% for type, messages in app.flashes %}
-                {% for message in messages %}
-                    <div class="flash flash-{{ type }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
+        {% for type, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="flash flash-{{ label }}">
+                    {{ message }}
+                </div>
             {% endfor %}
+        {% endfor %}
 
-            {% block main %}
-            {% endblock %}
-        </main>
+
     </div>
+    {% endblock %}
     <footer class="Footer Page_Footer"> {% block footer %}
         <p class="Copyrights">
-            &copy; Sortir date("Y")
+            &copy; Sortir datetime("Y")
         </p>
         <p>
             By Rouat Typhaine, Le Mauff Jianying, Soyeux Timothee, Robert Pascal.   [<a href="https://github.com/typhaineRouat/projet-sortir-groupe-6.git">CC BY-SA 3.0</a>],
@@ -76,6 +77,7 @@
         {% endblock %}
     </footer>
 
+</div>
 </div>
 </body>
 </html>

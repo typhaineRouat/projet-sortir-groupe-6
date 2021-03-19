@@ -11,22 +11,23 @@ use Doctrine\ORM\Mapping as ORM;
 class Lieu
 {
     /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Ville", inversedBy="lieuxVille")
      */
     private $ville;
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="Lieu")
+     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="lieu")
      */
     private $sortiesLieu;
 
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -101,20 +102,17 @@ class Lieu
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
+
     public function getVille()
     {
         return $this->ville;
     }
 
-    /**
-     * @param mixed $ville
-     */
-    public function setVille($ville): void
+
+    public function setVille($ville)
     {
         $this->ville = $ville;
+        return $this;
     }
 
 

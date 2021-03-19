@@ -4,24 +4,16 @@ namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UtilisateurRepository::class)
  */
-class Utilisateur
+class Utilisateur implements UserInterface
 {
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Sortie", mappedBy="organisateur")
-     */
-    private $sortiesOrganisees;
-
-
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Site", inversedBy="utilisateurs")
-     */
-    private $site;
+    public function __toString():string{
+        return $this->getNom();
+    }
 
     /**
      * @ORM\Id
@@ -29,6 +21,16 @@ class Utilisateur
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="organisateur")
+     */
+    private $sortiesOrganisees;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Site", inversedBy="utilisateurs")
+     */
+    private $site;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -43,7 +45,7 @@ class Utilisateur
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $pseudo;
+    private $username;
 
     /**
      * @ORM\Column(type="string", length=10)
@@ -58,7 +60,7 @@ class Utilisateur
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $motDePasse;
+    private $password;
 
     /**
      * @ORM\Column(type="boolean")
@@ -70,9 +72,42 @@ class Utilisateur
      */
     private $actif;
 
+    /**
+     * @ORM\Column(type="json")
+     */
+    private  $roles;
+
+
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getUsername() : ?string
+    {
+        return $this->username;
+    }
+
+    /**
+     * @param mixed $username
+     */
+    public function setUsername($username): void
+    {
+        $this->username = $username;
+    }
+
+    public function getPassword() : ?string
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param mixed $password
+     */
+    public function setPassword($password): void
+    {
+        $this->password = $password;
     }
 
     public function getNom(): ?string
@@ -95,18 +130,6 @@ class Utilisateur
     public function setPrenom(string $prenom): self
     {
         $this->prenom = $prenom;
-
-        return $this;
-    }
-
-    public function getPseudo(): ?string
-    {
-        return $this->pseudo;
-    }
-
-    public function setPseudo(string $pseudo): self
-    {
-        $this->pseudo = $pseudo;
 
         return $this;
     }
@@ -135,18 +158,6 @@ class Utilisateur
         return $this;
     }
 
-    public function getMotDePasse(): ?string
-    {
-        return $this->motDePasse;
-    }
-
-    public function setMotDePasse(string $motDePasse): self
-    {
-        $this->motDePasse = $motDePasse;
-
-        return $this;
-    }
-
     public function getAdmin(): ?bool
     {
         return $this->admin;
@@ -171,21 +182,46 @@ class Utilisateur
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getSortiesOrganisees()
     {
         return $this->sortiesOrganisees;
     }
 
-    /**
-     * @param mixed $sortiesOrganisees
-     */
-    public function setSortiesOrganisees($sortiesOrganisees): void
+    public function setSortiesOrganisees($sortiesOrganisees)
     {
         $this->sortiesOrganisees = $sortiesOrganisees;
+        return $this;
     }
 
+    public function getSite()
+    {
+        return $this->site;
+    }
 
+    public function setSite($site)
+    {
+        $this->site = $site;
+        return $this;
+    }
+
+    public function getRoles() :iterable
+    {
+        return $this->roles;
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function __construct()
+    {
+        $this->roles = [ 'ROLE_USER' ];
+    }
+
+    public function eraseCredentials()
+    {
+        // $this->password = '';
+        return null;
+    }
 }
