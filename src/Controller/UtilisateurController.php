@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Utilisateur;
 use App\Form\RegistrationType;
-use App\Form\UtilisateurType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,43 +12,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-
 class UtilisateurController extends AbstractController
 {
-
-
-    /**
-     * @Route("/gestion", name="utilisateur_gestion")
-     */
-    public function gestionUtilisateur(int $id, Request $request, EntityManagerInterface $em)
-    {
-
-        $utilisateurForm = $this->createForm(UtilisateurType::class);
-
-        $utilisateurForm->handleRequest($request);
-
-        $repository = $em->getRepository(Utilisateur::class);
-        $utilisateur   = $repository->findOneBy(['id'=>$id]);
-        dd($utilisateur);
-
-        if ($utilisateurForm->isSubmitted()){
-
-
-
-            $em->persist($utilisateur);
-            $em->flush();
-
-            $this->addFlash('success', 'Le profil a bien été modifié');
-
-            return $this->redirectToRoute('register');
-
-        }
-        return $this->render('utilisateur/gestion.html.twig',[
-            "utilisateurForm" => $utilisateurForm->createView()
-
-        ]);
-    }
     
+
     /**
      * @route("/login", name="user_login")
      */
@@ -64,14 +30,15 @@ class UtilisateurController extends AbstractController
         ]);
     }
 
-/**
+    /**
      * @Route("/logout", name="logout")
      */
     public function  logout()
     {
 
     }
-/**
+
+    /**
      * @Route("/register", name="user_register")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
@@ -102,12 +69,5 @@ class UtilisateurController extends AbstractController
     }
 
   
-
-
-       
-    
-   
-
-
-    
+    }
 }
