@@ -14,17 +14,61 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class UtilisateurController extends AbstractController
 {
-    /**
-     * @Route("/utilisateur", name="utilisateur")
-     */
+    
 
-    public function index(): Response
+    /**
+     * @route("/login", name="user_login")
+     */
+    public function login(AuthenticationUtils $utils): Response
     {
-        return $this->render('utilisateur/index.html.twig', [
-            'controller_name' => 'UtilisateurController',
+
+
+    return $this->render("utilisateur/login.html.twig", [
+        'loginError'      => $utils->getLastAuthenticationError(),
+        'loginUsername'   => $utils->getLastUsername(),
+
         ]);
     }
 
+    /**
+     * @Route("/logout", name="logout")
+     */
+    public function  logout()
+    {
+
+    }
+
+    /**
+     * @Route("/register", name="user_register")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param UserPasswordEncoderInterface $encoder
+     * @return Response
+     */
+    public function register(
+        Request                      $request,
+        EntityManagerInterface       $entityManager,
+        UserPasswordEncoderInterface $encoder,
+    ): Response {
+        $utilisateur            = new Utilisateur;
+        $registrationForm = $this->createForm(RegistrationType::class, $utilisateur);
+        $registrationForm->handleRequest($request);
+
+        if ($registrationForm->isSubmitted() && $registrationForm->isValid()) {
+            $utilisateur->setPassword($encoder->encodePassword($utilisateur, $utilisateur->getPassword()));
+            $entityManager->persist($utilisateur);
+            $entityManager->flush();
+            $this->addFlash('success', 'Inscription réussie');
+            return $this->redirectToRoute('user_login');
+        }
+
+        return $this->render('utilisateur/register.html.twig', [
+            'controller_name'  => 'UtilisateurController',
+            'registrationForm' => $registrationForm->createView(),
+        ]);
+    }
+
+<<<<<<< HEAD
     /**
      * @route("/login", name="user_login")
      */
@@ -84,5 +128,8 @@ class UtilisateurController extends AbstractController
     public function accueil(){
         return $this->render('accueil_test.html.twig'
         );
+=======
+  
+>>>>>>> main
     }
 }

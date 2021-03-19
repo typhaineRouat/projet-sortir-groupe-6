@@ -1,0 +1,16 @@
+.flash  {
+    padding: 20px;
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    color: #FFF;
+}
+
+.flash-success   {
+    background-color: #6b9311;
+}
+
+.flash-error    {
+    background-color: #AA3333;
+}
+
