@@ -81,6 +81,7 @@ class UtilisateurController extends AbstractController
         $utilisateurForm = $this->createForm(UtilisateurType::class, $utilisateur);
         $utilisateurForm->handleRequest($request);
 
+<<<<<<< Updated upstream
 
         if ($utilisateurForm->isSubmitted()){
             $utilisateur->setPassword($encoder->encodePassword($utilisateur, $utilisateur->getPassword()));
@@ -91,5 +92,70 @@ class UtilisateurController extends AbstractController
         return $this->render('utilisateur/gestion.html.twig',[
             "utilisateurForm" => $utilisateurForm->createView()
         ]);
+=======
+<<<<<<< HEAD
+  
+=======
+    /**
+     * @route("/login", name="user_login")
+     */
+    public function login(AuthenticationUtils $utils): Response
+    {
+
+
+    return $this->render("utilisateur/login.html.twig", [
+        'loginError'      => $utils->getLastAuthenticationError(),
+        'loginUsername'   => $utils->getLastUsername(),
+
+        ]);
+    }
+
+    /**
+     * @Route("/logout", name="logout")
+     */
+    public function  logout()
+    {
+
+    }
+
+    /**
+     * @Route("/register", name="user_register")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param UserPasswordEncoderInterface $encoder
+     * @return Response
+     */
+    public function register(
+        Request                      $request,
+        EntityManagerInterface       $entityManager,
+        UserPasswordEncoderInterface $encoder,
+    ): Response {
+        $utilisateur            = new Utilisateur;
+        $registrationForm = $this->createForm(RegistrationType::class, $utilisateur);
+        $registrationForm->handleRequest($request);
+
+        if ($registrationForm->isSubmitted() && $registrationForm->isValid()) {
+            $utilisateur->setPassword($encoder->encodePassword($utilisateur, $utilisateur->getPassword()));
+            $entityManager->persist($utilisateur);
+            $entityManager->flush();
+            $this->addFlash('success', 'Inscription réussie');
+            return $this->redirectToRoute('user_login');
+        }
+
+        return $this->render('utilisateur/register.html.twig', [
+            'controller_name'  => 'UtilisateurController',
+            'registrationForm' => $registrationForm->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/accueil", name="sortie_accueil")
+     * @return Response
+     */
+    public function accueil(){
+        return $this->render('accueil_test.html.twig'
+        );
+>>>>>>> main
+>>>>>>> Stashed changes
     }
 }
