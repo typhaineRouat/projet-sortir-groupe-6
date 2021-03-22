@@ -14,7 +14,7 @@ security:
             form_login:
                 login_path: user_login
                 check_path: user_login
-                default_target_path: sortie_accueil
+                default_target_path: gestion/{id}
             logout:
                 path: user_logout
                 target: login
