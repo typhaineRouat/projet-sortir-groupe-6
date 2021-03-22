@@ -70,7 +70,7 @@ class Ville
     }
 
 
-    public function setLieuxVille(ArrayCollection $lieuxVille)
+    public function setLieuxVille($lieuxVille)
     {
         $this->lieuxVille = $lieuxVille;
         return $this;

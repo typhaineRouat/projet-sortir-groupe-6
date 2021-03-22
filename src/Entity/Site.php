@@ -10,6 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Site
 {
+    public function __toString():string{
+        return $this->getNom();
+    }
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

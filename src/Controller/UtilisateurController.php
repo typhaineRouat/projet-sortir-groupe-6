@@ -60,7 +60,7 @@ class UtilisateurController extends AbstractController
             $utilisateur->setPassword($encoder->encodePassword($utilisateur, $utilisateur->getPassword()));
             $entityManager->persist($utilisateur);
             $entityManager->flush();
-            $this->addFlash('success', 'Inscription rÃ©ussie');
+            $this->addFlash('success', 'Inscription réussie');
             return $this->redirectToRoute('user_login');
         }
 
@@ -85,7 +85,7 @@ class UtilisateurController extends AbstractController
         if ($utilisateurForm->isSubmitted()){
             $utilisateur->setPassword($encoder->encodePassword($utilisateur, $utilisateur->getPassword()));
             $em->flush();
-            $this->addFlash('success', 'Le profil a bien Ã©tÃ© modifiÃ©');
+            $this->addFlash('success', 'Le profil a bien été modifié');
             return $this->redirectToRoute('register');
         }
         return $this->render('utilisateur/gestion.html.twig',[

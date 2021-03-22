@@ -1,0 +1,108 @@
+{% extends 'layout.html.twig' %}
+
+{% block nav %}
+
+{% endblock %}
+
+    {% block main %}
+        <div class="container ">
+
+            <div class="col-md row justify-content-end">
+
+                <h5>Date du jour {{ dateDuJOur|date('d/m/Y') }}</h5><br>
+
+            </div>
+        </div>
+
+        <div class="container ">
+            <div class="col-md row justify-content-end">
+
+                <h5>Participant : </h5>
+            </div>
+        </div>
+
+        <div class="container my-5">
+        <div class="row g-5 align-items-end justify-content-evenly">
+        <div class="col-md-5">
+    <h2 class="mb-3">Filtrer les sorties</h2>
+
+            {{ form_start(accueilForm) }}
+
+            {{ form_label(accueilForm.site) }}
+            {{ form_widget(accueilForm.site) }}
+<br>
+            {{ form_label(accueilForm.q) }}
+            {{ form_widget(accueilForm.q) }}
+<br>
+            {{ form_label(accueilForm.dateMin) }}
+            {{ form_widget(accueilForm.dateMin) }}
+<br>
+            {{ form_label(accueilForm.dateMax) }}
+            {{ form_widget(accueilForm.dateMax) }}
+        </div>
+            <div class="col-md-5 ">
+
+            {{ form_label(accueilForm.sortieOrga) }}
+            {{ form_widget(accueilForm.sortieOrga) }}
+<br>
+            {{ form_label(accueilForm.sortieInscrit) }}
+            {{ form_widget(accueilForm.sortieInscrit) }}
+<br>
+            {{ form_label(accueilForm.sortiePasInscrit) }}
+            {{ form_widget(accueilForm.sortiePasInscrit) }}
+<br>
+            {{ form_label(accueilForm.sortiePassee) }}
+            {{ form_widget(accueilForm.sortiePassee) }}
+            </div>
+            {{ form_widget(accueilForm) }}
+            <div class="col-md-2 ">
+
+            {{ form_label(accueilForm.Rechercher) }}
+
+            </div>
+             {{ form_end(accueilForm) }}
+
+
+        </div>
+        </div>
+
+
+        <div class="container my-5">
+            <div class="row g-5 justify-content-evenly">
+                <div class="col-md">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered">
+                            <thead class="table-dark">
+                            <th>Nom de la sortie</th>
+                            <th>Date de la sortie</th>
+                            <th>Cloture</th>
+                            <th>Inscrits/places</th>
+                            <th>Etat</th>
+                            <th>Inscrit</th>
+                            <th>Organisateur</th>
+                            <th>Actions</th>
+                            </thead>
+
+                            {% for sortie in sorties %}
+                                <tr>
+                                    <td>{{ sortie.getNom() }} </td>
+                                    <td>{{ sortie.getDateHeureDebut()|date('d-m-Y à H:i') }} </td>
+                                    <td> {{ sortie.getDateLimiteInscription()|date('d-m-Y à H:i') }}</td>
+                                    <td>  {{ sortie.participants|length }}/ {{ sortie.getNbInscriptionMax() }}</td>
+                                    <td> {{ sortie.getEtat() }} </td>
+                                    <td> X</td>
+                                    <td> {{ sortie.getOrganisateur() }} </td>
+                                    <td> à faire</td>
+
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-secondary btn-lg" disabled><a href="{{ url('sortie_create') }}">Créer une sortie</a>
+        </button>
+
+    {% endblock %}
