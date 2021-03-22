@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Entity;
-
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -34,8 +35,8 @@ class Sortie
     private $organisateur;
 
     /**
-     * @var ArrayCollection
-     * @ORM\ManyToMany (targetEntity="App\Entity\Utilisateur")
+     *
+     * @ORM\ManyToMany (targetEntity="App\Entity\Utilisateur", mappedBy="sortiesUtilisateurs")
      */
     private $participants;
 
@@ -192,18 +193,45 @@ class Sortie
     }
 
 
-    public function getParticipants()
+    public function __construct()
+    {
+        $this->participants = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection|Utilisateur[]
+     */
+    public function getParticipants():Collection
     {
         return $this->participants;
     }
 
-
+    /**
+     * @param ArrayCollection $participants
+     *
+     */
     public function setParticipants($participants)
     {
         $this->participants = $participants;
         return $this;
     }
 
+    public function addParticipant(Utilisateur $participant):self
+    {
+        if(!$this->participants->contains($participant)){
+            $this->participants[] = $participant;
+            $participant->addSort($this);
+        }
+        return $this;
+    }
+    public function removeParticipant(Utilisateur $participant):self
+    {
+        if(!$this->participants->contains($participant)){
+            $this->participants ->removeElement($participant);
+            $participant-> removeSort($this);
+        }
+        return $this;
+    }
 
     public function getEtat()
     {

@@ -69,16 +69,86 @@
             {% endblock %}
         </main>
     </div>
-    <footer class="Footer Page_Footer"> {% block footer %}
-            <p class="Copyrights">
-                &copy; Sortir date("2021")
-            </p>
-            <p>
-                By Le Mauff Jianying, Robert Pascal, Rouat Typhaine, Soyeux Timothee. [<a
-                        href="https://github.com/typhaineRouat/projet-sortir-groupe-6.git">GitHub</a>],
-            </p>
-        {% endblock %}
-    </footer>
+    <footer class="text-center text-white" style="background-color: #45637d;">
+            {% block footer %}
+            <div class="container p-4">
+                <section class="">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
+                            <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                                    data-ripple-color="light">
+
+                                <a href="{{ url('sortie_create') }}">
+                                    <img src="{{ asset('images/img1.jpg') }}" class="w-100"/>
+                                    <div class="mask" ></div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
+                            <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                                    data-ripple-color="light">
+
+                                <a href="{{ url('sortie_create') }}">
+                                    <img src="{{ asset('images/img2.jpg') }}" class="w-100"/>
+                                    <div class="mask" ></div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
+                            <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                                    data-ripple-color="light">
+
+                                <a href="{{ url('sortie_create') }}">
+                                    <img src="{{ asset('images/img3.jpg') }}" class="w-100"/>
+                                    <div class="mask"></div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
+                            <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                                    data-ripple-color="light">
+
+                                <a href="{{ url('sortie_create') }}">
+                                    <img src="{{ asset('images/img4.jpg') }}" class="w-100"/>
+                                    <div class="mask" ></div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
+                            <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                                    data-ripple-color="light">
+
+                                <a href="{{ url('sortie_create') }}">
+                                    <img src="{{ asset('images/img5.jpg') }}" class="w-100"/>
+                                    <div class="mask" ></div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
+                            <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                                    data-ripple-color="light">
+
+                                <a href="{{ url('sortie_create') }}">
+                                    <img src="{{ asset('images/img6.jpg') }}" class="w-100"/>
+                                    <div class="mask" ></div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+                <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                    <p class="Copyrights">
+                        &copy; Sortir date("Y")
+                    </p>
+                    <p>
+                        By Rouat Typhaine, Le Mauff Jianying, Soyeux Timothee, Robert Pascal.   [<a href="https://github.com/typhaineRouat/projet-sortir-groupe-6.git">CC BY-SA 3.0</a>],
+                    </p>
+                </div>
+
+                {% endblock %}
+        </footer>
 
 </div>
 </body>

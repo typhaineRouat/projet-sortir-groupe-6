@@ -1,0 +1,104 @@
+{% extends 'layout.html.twig' %}
+
+{% block nav %}
+    class="Navbar Page_Nav">
+    <h1 class="Title Navbar_Title">
+        <a href="" class="Link Title_Link Navbar_Link">
+            <img src="{{ asset('images/logo.png') }}" alt="groupe_6_logo" class="Logo Title_Logo">
+
+        </a>
+    </h1>
+    <ul class="Menu Navbar_Menu">
+        <li class="Menu_Item">
+            <a href="" class="Link Menu_Link Navbar_Link">Accueil</a>
+        </li>
+        <li class="Menu_Item">
+            <a href="" class="Link Menu_Link Navbar_Link">Mon profil</a>
+        </li>
+        <li class="Menu_Item">
+            <a href="" class="Link Menu_Link Navbar_Link">Se déconnecter</a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block header %}
+    <div class="row justify-content-md-center">
+        <h1> Ajouter un lieu</h1>
+    </div>
+{% endblock%}
+{% block main %}
+
+<div class="form-controle ">
+    {{ form_start(lieuForm) }}
+    <div class="row justify-content-md-center ">
+        <div class=" row form-group col-md-7">
+            <div class="col-md-4">
+                {{ form_label(lieuForm.nom) }}
+            </div>
+            <div class="col-md-8">
+                {{ form_widget(lieuForm.nom) }}
+                {{ form_errors(lieuForm.nom) }}
+            </div>
+        </div>
+        <div class=" row form-group col-md-7">
+            <div class="col-md-4">
+                {{ form_label(lieuForm.ville) }}
+            </div>
+            <div class="col-md-8">
+                {{ form_widget(lieuForm.ville) }}
+                {{ form_errors(lieuForm.ville) }}
+            </div>
+        </div>
+        <div class=" row form-group col-md-7">
+            <div class="col-md-4">
+                {{ form_label(lieuForm.CodePostal) }}
+            </div>
+            <div class="col-md-8">
+                {{ form_widget(lieuForm.CodePostal) }}
+                {{ form_errors(lieuForm.CodePostal) }}
+            </div>
+        </div>
+        <div class=" row form-group col-md-7">
+            <div class="col-md-4">
+                {{ form_label(lieuForm.rue) }}
+            </div>
+            <div class="col-md-8">
+                {{ form_widget(lieuForm.rue) }}
+                {{ form_errors(lieuForm.rue) }}
+            </div>
+        </div>
+        <div class=" row form-group col-md-7">
+            <div class="col-md-4">
+                {{ form_label(lieuForm.latitude) }}
+            </div>
+            <div class="col-md-8">
+                {{ form_widget(lieuForm.latitude) }}
+                {{ form_errors(lieuForm.latitude) }}
+            </div>
+        </div>
+        <div class=" row form-group col-md-7">
+            <div class="col-md-4">
+                {{ form_label(lieuForm.longitude) }}
+            </div>
+            <div class="col-md-8">
+                {{ form_widget(lieuForm.longitude) }}
+                {{ form_errors(lieuForm.longitude) }}
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-2">
+            <button type="submit" class="btn-lg  btn-dark btn-block" > Enregister</button>
+        </div>
+        <div class="col-md-2">
+            <a class="btn btn-lg  btn-dark btn-block" href="{{ url('sortie_create') }}" role="button">
+                Retour
+            </a>
+        </div>
+        <div class="col-md-2" >
+            <button  type="submit" class="btn-lg  btn-dark btn-block">Annuler</button>
+        </div>
+    </div>
+    {{ form_end(lieuForm) }}
+</div>
+{% endblock %}

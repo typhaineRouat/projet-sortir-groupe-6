@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -23,7 +25,14 @@ class Utilisateur implements UserInterface
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="organisateur")
+     *
+     * @ORM\ManyToMany (targetEntity="App\Entity\Sortie", inversedBy="participants")
+     */
+    private $sortiesUtilisateurs;
+
+
+    /**
+     * @ORM\OneTomany(targetEntity="App\Entity\Sortie", mappedBy="organisateur")
      */
     private $sortiesOrganisees;
 
@@ -31,6 +40,7 @@ class Utilisateur implements UserInterface
      * @ORM\ManyToOne(targetEntity="App\Entity\Site", inversedBy="utilisateurs")
      */
     private $site;
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -132,6 +142,7 @@ class Utilisateur implements UserInterface
         return $this;
     }
 
+  
     public function getTelephone(): ?string
     {
         return $this->telephone;
@@ -155,6 +166,7 @@ class Utilisateur implements UserInterface
 
         return $this;
     }
+
 
     public function getAdmin(): ?bool
     {
@@ -180,10 +192,12 @@ class Utilisateur implements UserInterface
         return $this;
     }
 
+
     public function getSortiesOrganisees()
     {
         return $this->sortiesOrganisees;
     }
+
 
     public function setSortiesOrganisees($sortiesOrganisees)
     {
@@ -191,10 +205,12 @@ class Utilisateur implements UserInterface
         return $this;
     }
 
+
     public function getSite()
     {
         return $this->site;
     }
+
 
     public function setSite($site)
     {
@@ -222,4 +238,41 @@ class Utilisateur implements UserInterface
         // $this->password = '';
         return null;
     }
+   //public function __construct()
+   // {
+    //    $this->sortiesUtilisateurs = new ArrayCollection();
+   // }
+    /**
+     * @return Collection | Sortie[]
+     */
+    public function getSortiesUtilisateurs(): Collection
+    {
+        return $this->sortiesUtilisateurs;
+    }
+
+    public function addSort(Sortie $sort):self
+    {
+        if(!$this->sortiesUtilisateurs->contains($sort)){
+            $this->sortiesUtilisateurs[] = $sort;
+        }
+        return $this;
+    }
+    public function removeSort(Sortie $sort):self
+    {
+        if(!$this->sortiesUtilisateurs->contains($sort)){
+            $this->sortiesUtilisateurs->removeElement($sort) ;
+        }
+        return $this;
+    }
+
+    /**
+     * @param ArrayCollection $sortiesUtilisateurs
+     * @return Utilisateur
+     */
+    public function setSortiesUtilisateurs(ArrayCollection $sortiesUtilisateurs): Utilisateur
+    {
+        $this->sortiesUtilisateurs = $sortiesUtilisateurs;
+        return $this;
+    }
+
 }

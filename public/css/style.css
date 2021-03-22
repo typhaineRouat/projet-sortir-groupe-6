@@ -1,4 +1,12 @@
-
+footer{
+    background-color: #45637d;
+}
+footer .mask{
+    background-color: rgba(251, 251, 251, 0.2);
+}
+footer .text-center.p-3{
+    background-color: rgba(0, 0, 0, 0.2);
+}
 .flash  {
     padding: 20px;
     display: block;
