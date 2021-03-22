@@ -1,0 +1,114 @@
+{% extends 'layout.html.twig' %}
+
+{% block nav %}
+    class="Navbar Page_Nav">
+    <h1 class="Title Navbar_Title">
+        <a href="" class="Link Title_Link Navbar_Link">
+            <img src="{{ asset('images/logo.png') }}" alt="groupe_6_logo" class="Logo Title_Logo" style="width: 20%">
+
+        </a>
+    </h1>
+    <ul class="Menu Navbar_Menu">
+        <li class="Menu_Item">
+            <a href="" class="Link Menu_Link Navbar_Link">Accueil</a>
+        </li>
+        <li class="Menu_Item">
+            <a href="" class="Link Menu_Link Navbar_Link">Mon profil</a>
+        </li>
+        <li class="Menu_Item">
+            <a href="" class="Link Menu_Link Navbar_Link">Se déconnecter</a>
+        </li>
+    </ul>
+{% endblock %}
+{% block header %}
+    <div class="row justify-content-md-center">
+        <h1> Afficher une sortie</h1>
+    </div>
+{% endblock%}
+{% block main %}
+    <div class="row justify-content-md-center ">
+        <div class="row col-md-10 ">
+            <div class="col-md-6">
+                <table class="table">
+                    <tr >
+                        <th>Nom de la sortie :</th>
+                        <td>{{ sortie.getNom()}}</td>
+                    </tr>
+                    <tr>
+                        <th>Date et heure de la sortie :</th>
+                        <td>{{ sortie.getDateHeureDebut()|date('d-m-Y à H:i' )}}</td>
+                    </tr>
+                    <tr>
+                        <th>Date limite d'inscrition :</th>
+                        <td>{{ sortie.getDateLimiteInscription()|date('d-m-Y ' )}}</td>
+                    </tr>
+                    <tr>
+                        <th>Nombre de places :</th>
+                        <td>{{ sortie.getNbInscriptionMax()}}</td>
+                    </tr>
+                    <tr>
+                        <th>Durée :</th>
+                        <td>{{ sortie.getDuree()}}</td>
+                    </tr>
+                    <tr>
+                        <th>Description et infos :</th>
+                        <td>{{ sortie.getDescription()}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <table class="table">
+                    <tr class=" ">
+                        <th>Ville organisatrice :</th>
+                        <td>{{ sortie.lieu.ville.getNom()}}</td>
+                    </tr>
+                    <tr>
+                        <th>Lieu :</th>
+                        <td>{{ sortie.lieu.getNom() }}</td>
+                    </tr>
+                    <tr>
+                        <th>Rue :</th>
+                        <td>{{ sortie.lieu.getRue()}}</td>
+                    </tr>
+                    <tr>
+                        <th>Code postal :</th>
+                        <td>{{ sortie.lieu.ville.getCodePostal()}}</td>
+                    </tr>
+                    <tr>
+                        <th>Latitude :</th>
+                        <td>{{ sortie.lieu.getLatitude()}} </td>
+                    <tr>
+                        <th>Longitude :</th>
+                        <td>{{ sortie.lieu.getLongitude()}}</td>
+                    </tr>
+                    </tr>
+                </table>
+            </div>
+        </div>
+                <div class="row justify-content-md-center col-md-8 ">
+                        <h4> Liste des participants inscrits : </h4>
+                        <br>
+                        <table class="table  table-hover  table-bordered">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Pseudo</th>
+                                    <th scope="col">Nom</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                {% for participant in sortie.getParticipants() %}
+                                <tr>
+                                    <th scope="row">{{loop.index}}</th>
+                                    <td>{{ participant.username|e }}</td>
+                                    <td>{{ participant.nom|e }}</td>
+                                </tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                </div>
+
+    </div>
+{% endblock %}

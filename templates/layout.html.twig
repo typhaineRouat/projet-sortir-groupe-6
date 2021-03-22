@@ -5,51 +5,54 @@
     <title>{% block title %}Welcome!{% endblock %}</title>
     {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
-
+    <!-- Gestion des polices -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,400;0,900;1,200;1,400;1,900&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,400;0,900;1,200;1,400;1,900&display=swap"
+          rel="stylesheet">
+    <!-- Import de Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-                    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Import favicon -->
     <link rel="icon" href="{{ asset('images/abeille.png') }}">
 
+    <a href="{{ url('sortie_accueil') }}"><img src="{{ asset('images/logoAbeille.png') }}"> </a>
+    <!-- Lien vers fichier de styles -->
     <link rel="stylesheet" href="{{ asset('style.css') }}">
     {% block stylesheets %}
-        {#{{ encore_entry_link_tags('app') }}#}
+        {# {{ encore_entry_link_tags('app') }} #}
     {% endblock %}
 
     {% block javascripts %}
-        {#{{ encore_entry_script_tags('app') }}#}
+        {# {{ encore_entry_script_tags('app') }} #}
     {% endblock %}
 </head>
 <body>
-<div class="Page container">
-    {% block nav %}<nav  class="Navbar Page_Nav">
+<div class="Page">
+    <nav {% block nav %} class="Navbar Page_Nav">
         <h1 class="Title Navbar_Title">
-            <a href="" class="Link Title_Link Navbar_Link">
-                <img src="" alt="groupe_6_logo" class="Logo Title_Logo">
+            <a href="{{ url('sortie_accueil') }}" class="Link Title_Link Navbar_Link">
+                <img src="{{ asset('images/logoAbeille.png') }}" alt="groupe_6_logo" class="Logo Title_Logo">
 
             </a>
         </h1>
-        <!--
-                <ul class="Menu Navbar_Menu">
 
-                    /** TO DO : RENOMMER URL
+        <ul class="Menu Navbar_Menu">
 
-                    <li class="Menu_Item">
-                        <a href="" class="Link Menu_Link Navbar_Link">Accueil</a>
-                    </li>
-                    <li class="Menu_Item">
-                        <a href="" class="Link Menu_Link Navbar_Link">Mon profil</a>
-                    </li>
-                    <li class="Menu_Item">
-                        <a href="" class="Link Menu_Link Navbar_Link">Se déconnecter</a>
-                    </li>
-                </ul>-->
-    </nav>{% endblock %}
+            <!-- TO DO : RENOMMER URL -->
 
-    <header> {% block header %} {% endblock%}  </header>
+            <li class="Menu_Item">
+                <a href="{{ url('sortie_accueil') }}" class="Link Menu_Link Navbar_Link">Accueil</a>
+            </li>
+            <li class="Menu_Item">
+                <a href="{{ url('profil') }}" class="Link Menu_Link Navbar_Link">Mon profil</a>
+            </li>
+            <li class="Menu_Item">
+                <a href="{{ url('connexion') }}" class="Link Menu_Link Navbar_Link">Se déconnecter</a>
+            </li>
+        </ul>
+        {% endblock %}</nav>
+
+    <header> {% block header %} {% endblock %}  </header>
 
 
     <div class="Page_Contents">
@@ -66,15 +69,86 @@
             {% endblock %}
         </main>
     </div>
-    <footer class="Footer Page_Footer"> {% block footer %}
-        <p class="Copyrights">
-            &copy; Sortir date("Y")
-        </p>
-        <p>
-            By Rouat Typhaine, Le Mauff Jianying, Soyeux Timothee, Robert Pascal.   [<a href="https://github.com/typhaineRouat/projet-sortir-groupe-6.git">CC BY-SA 3.0</a>],
-        </p>
-        {% endblock %}
-    </footer>
+    <footer class="text-center text-white" style="background-color: #45637d;">
+            {% block footer %}
+            <div class="container p-4">
+                <section class="">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
+                            <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                                    data-ripple-color="light">
+
+                                <a href="{{ url('sortie_create') }}">
+                                    <img src="{{ asset('images/img1.jpg') }}" class="w-100"/>
+                                    <div class="mask" ></div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
+                            <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                                    data-ripple-color="light">
+
+                                <a href="{{ url('sortie_create') }}">
+                                    <img src="{{ asset('images/img2.jpg') }}" class="w-100"/>
+                                    <div class="mask" ></div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
+                            <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                                    data-ripple-color="light">
+
+                                <a href="{{ url('sortie_create') }}">
+                                    <img src="{{ asset('images/img3.jpg') }}" class="w-100"/>
+                                    <div class="mask"></div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
+                            <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                                    data-ripple-color="light">
+
+                                <a href="{{ url('sortie_create') }}">
+                                    <img src="{{ asset('images/img4.jpg') }}" class="w-100"/>
+                                    <div class="mask" ></div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
+                            <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                                    data-ripple-color="light">
+
+                                <a href="{{ url('sortie_create') }}">
+                                    <img src="{{ asset('images/img5.jpg') }}" class="w-100"/>
+                                    <div class="mask" ></div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
+                            <div class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                                    data-ripple-color="light">
+
+                                <a href="{{ url('sortie_create') }}">
+                                    <img src="{{ asset('images/img6.jpg') }}" class="w-100"/>
+                                    <div class="mask" ></div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+                <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                    <p class="Copyrights">
+                        &copy; Sortir date("Y")
+                    </p>
+                    <p>
+                        By Rouat Typhaine, Le Mauff Jianying, Soyeux Timothee, Robert Pascal.   [<a href="https://github.com/typhaineRouat/projet-sortir-groupe-6.git">CC BY-SA 3.0</a>],
+                    </p>
+                </div>
+
+                {% endblock %}
+        </footer>
 
 </div>
 </body>
