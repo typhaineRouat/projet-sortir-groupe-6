@@ -42,6 +42,7 @@ class Sortie
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Etat", inversedBy="sorties")
+     *
      */
     private $etat;
 
@@ -75,6 +76,11 @@ class Sortie
      * @ORM\Column(type="string", length=1000)
      */
     private $description;
+
+    /**
+     * @ORM\Column(type="string", length=1000)
+     */
+    private $motif;
 
     public function getId(): ?int
     {
@@ -243,6 +249,18 @@ class Sortie
     {
         $this->etat = $etat;
         return $this;
+    }
+
+
+    public function getMotif()
+    {
+        return $this->motif;
+    }
+
+
+    public function setMotif($motif): void
+    {
+        $this->motif = $motif;
     }
 
 

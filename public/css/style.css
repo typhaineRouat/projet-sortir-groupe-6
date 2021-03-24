@@ -1,8 +1,16 @@
+body{
+
+    background-image: linear-gradient(#dae8f5,#fceca2);
+}
 footer{
+    margin-top: 50px;
     background-color: #45637d;
 }
 footer .mask{
     background-color: rgba(251, 251, 251, 0.2);
+}
+footer .text-center.p-3{
+    background-color: rgba(0, 0, 0, 0.2);
 }
 footer .text-center.p-3{
     background-color: rgba(0, 0, 0, 0.2);
@@ -14,7 +22,19 @@ footer .text-center.p-3{
     font-weight: bold;
     color: #FFF;
 }
-
+.title_Logo{
+    width: 30%;
+}
+.navbar.navbar-expand-lg{
+    background-color:#0f314f;
+}
+nav ul li a {
+    font-size: large;
+}
+ header {
+    margin-top: 20px;
+     margin-bottom: 50px;
+}
 .flash-success   {
     background-color: #6b9311;
 }
@@ -22,4 +42,14 @@ footer .text-center.p-3{
 .flash-error    {
     background-color: #AA3333;
 }
-
+.navbar{
+    background-color:#0f314f;
+}
+main .participantbox{
+    color: orangered;
+    font-style: italic;
+}
+main label{
+    color: #0f314f;
+    font-weight: 600;
+}

@@ -37,7 +37,7 @@ class SortieType extends AbstractType
                 'format'=>'yyyy-MM-dd HH:mm',
                 'required'=>true,
                 'attr'=>[
-                    'class'=> 'form-control',
+                    'class'=> 'form-control js-datepicker',
                 ],
             ])
 
@@ -71,7 +71,8 @@ class SortieType extends AbstractType
                     'class'=> 'form-control col-md-8',
                 ],
             ])
-            ->add('organisateur',EntityType::class,[
+            //->add('organisateur')
+            ->add('SiteOrga',EntityType::class,[
                 'class'=>Site::class,
                 'choice_label'=>'nom',
                 'label'=>'Ville organisatrice :',
@@ -142,7 +143,7 @@ class SortieType extends AbstractType
                 ],
             ])
 
-            //->add('SiteOrga')
+
            // ->add('participants')
            // ->add('etat')
         ;

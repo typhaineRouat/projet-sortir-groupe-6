@@ -2,7 +2,7 @@
 
 {% block header %}
     <div class="row justify-content-md-center">
-    <h1> Créer une sortie</h1>
+    <h1> Modifier une sortie</h1>
     </div>
 {% endblock%}
 {% block main %}
@@ -157,7 +157,10 @@
             <button type="submit" class="btn-lg  btn-dark btn-block" > Publier</button>
         </div>
         <div class="col-md-2">
-            <a class="btn btn-lg  btn-dark btn-block" href="{{url('sortie_accueil')  }}" role="button">
+            <button type="submit" class="btn-lg  btn-dark btn-block" > Supprimer</button>
+        </div>
+        <div class="col-md-2">
+            <a class="btn btn-lg  btn-dark btn-block" href="{{url('sortie_details',{'id':sortie.id})  }}" role="button">
                 Annuler
             </a>
         </div>

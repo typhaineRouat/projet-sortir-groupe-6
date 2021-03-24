@@ -2,6 +2,9 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="ENI Ecole">
+        <meta name="author" content="ENI Ecole">
         <title>{% block title %}Sortir.com{% endblock %}</title>
         <!--Gestion des polices -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -12,28 +15,26 @@
         <!-- Import favicon -->
         <link rel="icon" href="{{ asset('images/abeille.png') }}">
       <!--Lien vers fichier de styles -->
-        <link rel="stylesheet" href="{{ asset('style.css') }}">
-
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         {% block stylesheets %}
             {#{{ encore_entry_link_tags('app') }}#}
         {% endblock %}
-
         {% block javascripts %}
             {#{{ encore_entry_script_tags('app') }}#}
         {% endblock %}
     </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-dark  static-top" style="background-color:#0f314f;">
+    <body >
+        <nav class="navbar navbar-expand-lg navbar-dark  static-top" >
             <div class="Page container">
 
                 <a href="{{ url('sortie_accueil') }}" class="navbar-brand" >
-                    <img src="{{ asset('images/logo.png') }}" alt="groupe_6_logo" class="Logo Title_Logo"  style="width: 40%">
+                    <img src="{{ asset('images/logo2.png') }}" alt="groupe_6_logo" class="Logo title_Logo" >
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse " id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto nav navbar-right">
                         {% block nav %}
                         <li class="nav-item ">
                             <a href="{{ url('sortie_accueil') }}" class="Link nav-link">Accueil</a>
@@ -50,7 +51,7 @@
             </div>
         </nav>
    <div class="Page container">
-            <header> {% block header %} {% endblock%}  </header>
+            <header > {% block header %} {% endblock%}  </header>
 
 
             <div class="Page_Contents">
@@ -69,7 +70,7 @@
             </div>
 
         </div>
-        <footer class="text-center text-white" style="background-color: #45637d;">
+        <footer class="text-center text-white" >
             {% block footer %}
             <div class="container p-4">
                 <section class="">
@@ -138,9 +139,9 @@
                 </section>
 
             </div>
-                <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                <div class="text-center p-3" >
                     <p class="Copyrights">
-                        &copy; Sortir date("Y")
+                        &copy; Sortir date(26/03/2021)
                     </p>
                     <p>
                         By Rouat Typhaine, Le Mauff Jianying, Soyeux Timothee, Robert Pascal.   [<a href="https://github.com/typhaineRouat/projet-sortir-groupe-6.git">CC BY-SA 3.0</a>],
