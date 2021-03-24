@@ -4,8 +4,10 @@ namespace App\Repository;
 
 use App\Data\SearchData;
 use App\Entity\Sortie;
+use App\Entity\Utilisateur;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @method Sortie|null find($id, $lockMode = null, $lockVersion = null)
@@ -24,9 +26,14 @@ class SortieRepository extends ServiceEntityRepository
      * récupère les sorties en lien avec une recherche
      *
      */
-    public function findSearch(SearchData $search)
+    public function findSearch(SearchData $search, Utilisateur $user)
     {
-        $query = $this->createQueryBuilder('s');
+
+        $query = $this->createQueryBuilder('s')
+            ->select('u', 's')
+            ->leftJoin('s.participants', 'u')
+            ->orderBy('s.dateHeureDebut', 'ASC');
+
 
         if (!empty($search->site)) {
             $query = $query
@@ -47,10 +54,27 @@ class SortieRepository extends ServiceEntityRepository
 
         if (!empty($search->dateMin) && !empty($search->dateMax) && ($search->dateMax) >= ($search->dateMin)) {
             $query = $query
-
                 ->andWhere('s.dateHeureDebut BETWEEN :dateMin AND :dateMax')
                 ->setParameter('dateMin', $search->dateMin)
                 ->setParameter('dateMax', $search->dateMax);
+
+        }
+        if (!empty($search->sortieInscrit)) {
+            $query = $query
+                ->andWhere(':sortieInscrit member of s.participants ')
+                ->setParameter('sortieInscrit', $user->getId());
+
+        }
+        if (!empty($search->sortiePasInscrit)) {
+            $query = $query
+                ->andWhere(':sortiePasInscrit NOT MEMBER OF s.participants')
+                ->setParameter('sortiePasInscrit', $user->getId());
+
+        }
+        if (!empty($search->sortieOrga)) {
+            $query = $query
+                ->andWhere('s.organisateur = :sortieOrga')
+                ->setParameter('sortieOrga', $user->getId());
 
         }
 

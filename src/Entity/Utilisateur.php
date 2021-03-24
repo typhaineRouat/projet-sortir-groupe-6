@@ -87,6 +87,11 @@ class Utilisateur implements UserInterface
      */
     private  $roles;
 
+     /**
+     * @ORM\OneToMany(targetEntity=Images::class, mappedBy="utilisateur", orphanRemoval=true, cascade={"persist"})
+     */
+    private $images;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -231,6 +236,7 @@ class Utilisateur implements UserInterface
     public function __construct()
     {
         $this->roles = [ 'ROLE_USER' ];
+        $this->images = new ArrayCollection();
     }
 
     public function eraseCredentials()
@@ -272,6 +278,36 @@ class Utilisateur implements UserInterface
     public function setSortiesUtilisateurs(ArrayCollection $sortiesUtilisateurs): Utilisateur
     {
         $this->sortiesUtilisateurs = $sortiesUtilisateurs;
+        return $this;
+    }
+
+    /**
+     * @return Collection|Images[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Images $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Images $image): self
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getUtilisateur() === $this) {
+                $image->setUtilisateur(null);
+            }
+        }
+
         return $this;
     }
 

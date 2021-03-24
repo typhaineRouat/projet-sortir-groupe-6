@@ -8,8 +8,6 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,6 +23,7 @@ class ListeSortieType extends AbstractType
                 'label' => 'Site',
                 'required' => false
             ])
+
             ->add('q', TextType::class, [
                 'label' => 'Le nom de la sortie contient : ',
                 'required' => false,
@@ -34,7 +33,6 @@ class ListeSortieType extends AbstractType
             ])
             ->add('dateMin', DateTimeType::class, [
                 'widget' => 'single_text',
-
                 'format' => 'dd-MM-yyyy',
                 'html5' => false,
                 'required' => false,
@@ -63,12 +61,8 @@ class ListeSortieType extends AbstractType
             ->add('sortiePassee', CheckboxType::class, [
                 'label' => 'Sorties passées',
                 'required' => false
-            ])
-            ->add('Rechercher', SubmitType::class, [
-                'attr' => ['class' => 'cssbouton'],
-
-
             ]);
+
 
     }
 

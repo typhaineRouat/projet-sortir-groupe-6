@@ -1,6 +1,6 @@
 <?php
 namespace App\Data;
-use App\Entity\Sortie;
+
 
 class SearchData{
 
@@ -17,7 +17,7 @@ class SearchData{
     /**
      * @var
      */
-    public  $dateMax;
+    public $dateMax;
 
     /**
      * @var

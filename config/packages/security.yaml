@@ -15,8 +15,9 @@ security:
                 check_path: user_login
                 default_target_path: /
             logout:
-                path: user_logout
-                target: login
+                path: logout
+                target: user_login
+
             remember_me:
                 secret: '%kernel.secret%'
                 path: /
