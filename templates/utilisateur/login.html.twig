@@ -1,0 +1,35 @@
+{%  extends 'layout.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+{% block nav %} {% endblock %}
+
+
+    {%  block main  %}
+<div class="form-group">
+    <h1>Connexion</h1>
+    {% if loginError %}
+        <div>{{ loginError.messageKey|trans(loginError.messageData, 'security') }}</div>
+    {% endif %}
+    <form action="{{ url('user_login') }}" method="post">
+        <div class="form-group">
+        <p>
+            <label for="login_username">Identifiant/e-Mail</label><br>
+            <input type="text" id="login_username" name="_username" value="{{ loginUsername }}">
+        </p>
+        <p>
+            <label for="login_password">Mot de passe</label><br>
+            <input type="password" id="login_password" name="_password">
+        </p>
+            <div class="checkbox mb-3">
+                <input type="checkbox" id="remember_me" name="_remember_me" checked/>
+                <label for="remember_me">Se souvenir de moi !</label>
+            </div>
+        <p>
+            <button class="btn btn-secondary btn-lg" type="submit">Connexion</a>
+            </button>
+        </p>
+
+
+    </form>
+</div>
+{% endblock %}

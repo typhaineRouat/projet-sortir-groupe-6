@@ -10,6 +10,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Etat
 {
+
+    public function __toString():string{
+        return $this->getLibelle();
+    }
+
     /**
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="etat")
@@ -24,41 +29,38 @@ class Etat
     private $id;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="string", length=255)
      */
-    private $libelle = [];
+    private $libelle;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getLibelle(): ?array
+    public function getLibelle(): ?string
     {
         return $this->libelle;
     }
 
-    public function setLibelle(array $libelle): self
+    public function setLibelle(string $libelle): self
     {
         $this->libelle = $libelle;
 
         return $this;
     }
 
-    /**
-     * @return ArrayCollection
-     */
-    public function getSorties(): ArrayCollection
+
+    public function getSorties()
     {
         return $this->sorties;
     }
 
-    /**
-     * @param ArrayCollection $sorties
-     */
-    public function setSorties(ArrayCollection $sorties): void
+
+    public function setSorties($sorties)
     {
         $this->sorties = $sorties;
+        return $this;
     }
 
 }

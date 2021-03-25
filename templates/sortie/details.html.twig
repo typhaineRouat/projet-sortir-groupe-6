@@ -1,0 +1,107 @@
+{% extends 'layout.html.twig' %}
+
+{% block header %}
+    <div class="row justify-content-md-center">
+        <h1> Afficher une sortie</h1>
+    </div>
+{% endblock%}
+{% block main %}
+    <div class="row justify-content-md-center ">
+        <div class="row col-md-11 ">
+            <div class="col-md-6">
+                <table class="table">
+                    <tr >
+                        <th>Nom de la sortie :</th>
+                        <td>{{ sortie.getNom()}}</td>
+                    </tr>
+                    <tr>
+                        <th>Date et heure de la sortie :</th>
+                        <td>{{ sortie.getDateHeureDebut()|date('d-m-Y à H:i' )}}</td>
+                    </tr>
+                    <tr>
+                        <th>Date limite d'inscrition :</th>
+                        <td>{{ sortie.getDateLimiteInscription()|date('d-m-Y ' )}}</td>
+                    </tr>
+                    <tr>
+                        <th>Nombre de places :</th>
+                        <td>{{ sortie.getNbInscriptionMax()}}</td>
+                    </tr>
+                    <tr>
+                        <th>Durée :</th>
+                        <td>{{ sortie.getDuree()}}</td>
+                    </tr>
+                    <tr>
+                        <th>Description et infos :</th>
+                        <td>{{ sortie.getDescription()}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <table class="table">
+                    <tr >
+                        <th>Ville organisatrice :</th>
+                        <td>{{ sortie.getSiteOrga}}</td>
+                    </tr>
+                    <tr>
+                        <th>Lieu :</th>
+                        <td>{{ sortie.lieu.getNom() }}</td>
+                    </tr>
+                    <tr>
+                        <th>Rue :</th>
+                        <td>{{ sortie.lieu.getRue()}}</td>
+                    </tr>
+                    <tr>
+                        <th>Code postal :</th>
+                        <td>{{ sortie.lieu.ville.getCodePostal()}}</td>
+                    </tr>
+                    <tr >
+                        <th>Ville :</th>
+                        <td>{{ sortie.lieu.ville.getNom()}}</td>
+                    </tr>
+                    <tr>
+                        <th>Latitude :</th>
+                        <td>{{ sortie.lieu.getLatitude()}} </td>
+                    <tr>
+                        <th>Longitude :</th>
+                        <td>{{ sortie.lieu.getLongitude()}}</td>
+                    </tr>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="row justify-content-md-center col-md-10 ">
+            <h4> Liste des participants inscrits : </h4>
+            <br>
+            <table class="table  table-hover  table-bordered">
+                <thead class="table-dark">
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Pseudo</th>
+                    <th scope="col">Nom</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for participant in sortie.getParticipants() %}
+                    <tr>
+                        <th scope="row">{{loop.index}}</th>
+                        <td>{{ participant.username}}</td>
+                        <td>{{ participant.nom }}</td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+        {% if app.user.id == sortie.getOrganisateur().getId() %}
+
+        <div class="row justify-content-md-center col-md-3">
+            <a class="btn btn-lg  btn-dark btn-block" href="{{ url('sortie_modifier',{'id':sortie.id}) }}" role="button">
+                Modifier cette sortie
+            </a>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

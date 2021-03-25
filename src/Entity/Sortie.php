@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Entity;
-
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,6 +11,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Sortie
 {
+
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Lieu", inversedBy="sortiesLieu")
      */
@@ -26,22 +35,17 @@ class Sortie
     private $organisateur;
 
     /**
-     * @var ArrayCollection
-     * @ORM\ManyToMany (targetEntity="App\Entity\Utilisateur")
+     *
+     * @ORM\ManyToMany (targetEntity="App\Entity\Utilisateur", mappedBy="sortiesUtilisateurs", cascade={"persist"})
      */
     private $participants;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Etat", inversedBy="sorties")
+     *
      */
     private $etat;
 
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -72,6 +76,11 @@ class Sortie
      * @ORM\Column(type="string", length=1000)
      */
     private $description;
+
+    /**
+     * @ORM\Column(type="string", length=1000)
+     */
+    private $motif;
 
     public function getId(): ?int
     {
@@ -150,20 +159,107 @@ class Sortie
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
+
     public function getLieu()
     {
         return $this->lieu;
     }
 
-    /**
-     * @param mixed $lieu
-     */
-    public function setLieu($lieu): void
+
+    public function setLieu($lieu)
     {
         $this->lieu = $lieu;
+        return $this;
+    }
+
+
+    public function getSiteOrga()
+    {
+        return $this->SiteOrga;
+    }
+
+
+    public function setSiteOrga($SiteOrga)
+    {
+        $this->SiteOrga = $SiteOrga;
+        return $this;
+    }
+
+
+    public function getOrganisateur()
+    {
+        return $this->organisateur;
+    }
+
+
+    public function setOrganisateur($organisateur)
+    {
+        $this->organisateur = $organisateur;
+        return $this;
+    }
+
+
+    public function __construct()
+    {
+        $this->participants = new ArrayCollection();
+    }
+
+
+    public function getParticipants()
+    {
+        return $this->participants;
+    }
+
+
+    public function setParticipants($participants)
+    {
+        $this->participants = $participants;
+        return $this;
+    }
+
+    public function addParticipant($participant)
+    {
+
+        if (!$this->participants->contains($participant)) {
+            $this->participants[] = $participant;
+            $participant->addSort($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipant($participant)
+    {
+        if ($this->participants->contains($participant)) {
+            $this->participants->removeElement($participant);
+            $participant->removeSort($this);
+        }
+
+        return $this;
+    }
+
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+        return $this;
+    }
+
+
+    public function getMotif()
+    {
+        return $this->motif;
+    }
+
+
+    public function setMotif($motif): void
+    {
+        $this->motif = $motif;
     }
 
 

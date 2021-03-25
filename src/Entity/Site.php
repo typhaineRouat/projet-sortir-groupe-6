@@ -10,6 +10,16 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Site
 {
+    public function __toString():string{
+        return $this->getNom();
+    }
+
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
 
     /**
      * @var ArrayCollection
@@ -23,12 +33,6 @@ class Site
      */
     private $utilisateurs;
 
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -52,20 +56,30 @@ class Site
         return $this;
     }
 
-    /**
-     * @return ArrayCollection
-     */
-    public function getSortiesParSite(): ArrayCollection
+
+    public function getSortiesParSite()
     {
         return $this->sortiesParSite;
     }
 
-    /**
-     * @param ArrayCollection $sortiesParSite
-     */
-    public function setSortiesParSite(ArrayCollection $sortiesParSite): void
+
+    public function setSortiesParSite($sortiesParSite)
     {
         $this->sortiesParSite = $sortiesParSite;
+        return $this;
+    }
+
+
+    public function getUtilisateurs()
+    {
+        return $this->utilisateurs;
+    }
+
+
+    public function setUtilisateurs( $utilisateurs)
+    {
+        $this->utilisateurs = $utilisateurs;
+        return $this;
     }
 
 

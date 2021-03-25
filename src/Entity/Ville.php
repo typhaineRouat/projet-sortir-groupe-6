@@ -11,17 +11,18 @@ use Doctrine\ORM\Mapping as ORM;
 class Ville
 {
     /**
-     * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="App\Entity\Lieu", mappedBy="ville")
-     */
-    private $lieuxVille;
-
-    /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="App\Entity\Lieu", mappedBy="ville")
+     */
+    private $lieuxVille;
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -62,20 +63,17 @@ class Ville
         return $this;
     }
 
-    /**
-     * @return ArrayCollection
-     */
-    public function getLieuxVille(): ArrayCollection
+
+    public function getLieuxVille()
     {
         return $this->lieuxVille;
     }
 
-    /**
-     * @param ArrayCollection $lieuxVille
-     */
-    public function setLieuxVille(ArrayCollection $lieuxVille): void
+
+    public function setLieuxVille($lieuxVille)
     {
         $this->lieuxVille = $lieuxVille;
+        return $this;
     }
 
 

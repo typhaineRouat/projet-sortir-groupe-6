@@ -1,0 +1,63 @@
+{% extends 'layout.html.twig' %}
+
+{% block header %}
+    <div class="row justify-content-md-center">
+        <h1> Annuler une sortie</h1>
+    </div>
+{% endblock%}
+{% block main %}
+
+<div class=" row justify-content-md-center">
+    <div class="col-md-8">
+        <table class="table">
+            <tr >
+                <th>Nom de la sortie :</th>
+                <td>{{ sortie.getNom()}}</td>
+            </tr>
+            <tr>
+                <th>Date et heure de la sortie :</th>
+                <td>{{ sortie.getDateHeureDebut()|date('d-m-Y à H:i' )}}</td>
+            </tr>
+            <tr >
+                <th>Ville organisatrice :</th>
+                <td>{{ sortie.lieu.ville.getNom()}}</td>
+            </tr>
+            <tr>
+                <th>Lieu :</th>
+                <td>{{ sortie.lieu.getNom() }}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-10  ">
+        {{ form_start(AnnulerSortieForm) }}
+        <div class=" row justify-content-md-center ">
+             <div class="col-md-9" >
+                     <table class="table">
+                         <tr >
+                             <th>
+                                 {{ form_label(AnnulerSortieForm.motif) }}
+                             </th>
+                             <th>
+                                 {{ form_widget(AnnulerSortieForm.motif) }}
+                                 {{ form_errors(AnnulerSortieForm.motif) }}
+                             </th>
+                         </tr>
+                     </table>
+
+             </div>
+             <div class="row col-md-8 justify-content-md-center" >
+                 <div class="col-md-3">
+                     <button type="submit" class="btn-lg  btn-dark btn-block" > Enregister</button>
+                 </div>
+                 <div class="col-md-3">
+                     <a class="btn btn-lg  btn-dark btn-block" href="{{ url('sortie_details',{'id':sortie.id}) }}" role="button">
+                         Annuler
+                     </a>
+                 </div>
+
+             </div>
+        </div>
+        {{ form_end(AnnulerSortieForm) }}
+    </div>
+</div>
+ {% endblock %}

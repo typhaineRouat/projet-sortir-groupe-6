@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+
+{% block main %}
+    <h1>Mon profil</h1>
+    {% form_theme utilisateurForm 'bootstrap_4_layout.html.twig' %}
+
+    {{ form_start(utilisateurForm) }}
+    {{ form_widget(utilisateurForm) }}
+
+    <button type="submit" class="btn-lg  btn-dark " > Enregister</button>
+    <button type="submit" class="btn-lg  btn-dark " > Annuler</button>
+
+    {{ form_end(utilisateurForm) }}
+
+
+{% endblock %}
