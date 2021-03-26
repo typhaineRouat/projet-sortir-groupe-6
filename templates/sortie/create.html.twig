@@ -2,168 +2,170 @@
 
 {% block header %}
     <div class="row justify-content-md-center">
-    <h1> Créer une sortie</h1>
+        <h1> Créer une sortie</h1>
     </div>
-{% endblock%}
+{% endblock %}
 {% block main %}
 
-<div class="form-controle ">
-    {{ form_start(sortieForm) }}
-    <div class=" row">
-        <div class="col-md-7">
-            <div class=" form-group row">
-                <div class="col-md-4">
-                    {{ form_label(sortieForm.nom) }}
+    <div class="form-controle ">
+        {{ form_start(sortieForm) }}
+        <div class=" row">
+            <div class="col-md-7">
+                <div class=" form-group row">
+                    <div class="col-md-4">
+                        {{ form_label(sortieForm.nom) }}
+                    </div>
+                    <div class="col-md-8">
+                        {{ form_widget(sortieForm.nom) }}
+                        {{ form_errors(sortieForm.nom) }}
+                    </div>
                 </div>
-                <div class="col-md-8">
-                    {{ form_widget(sortieForm.nom) }}
-                    {{ form_errors(sortieForm.nom) }}
+                <div class=" form-group row">
+                    <div class="col-md-4">
+                        {{ form_label(sortieForm.dateHeureDebut) }}
+                    </div>
+                    <div class="col-md-8 row">
+                        <div class="col-md-7">
+                            {{ form_widget(sortieForm.dateHeureDebut) }}
+                            {{ form_errors(sortieForm.dateHeureDebut) }}
+                        </div>
+                        <div class="col-md-2">
+                            <img src="{{ asset('images/calendar.png') }}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class=" form-group row">
+                    <div class="col-md-4">
+                        {{ form_label(sortieForm.dateLimiteInscription) }}
+                    </div>
+                    <div class="col-md-8 row">
+                        <div class="col-md-7">
+                            {{ form_widget(sortieForm.dateLimiteInscription) }}
+                            {{ form_errors(sortieForm.dateLimiteInscription) }}
+                        </div>
+                        <div class="col-md-2">
+                            <img src="{{ asset('images/calendar.png') }}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class=" form-group row">
+                    <div class="col-md-4">
+                        {{ form_label(sortieForm.nbInscriptionMax) }}
+                    </div>
+                    <div class="col-md-8">
+                        {{ form_widget(sortieForm.nbInscriptionMax) }}
+                        {{ form_errors(sortieForm.nbInscriptionMax) }}
+                    </div>
+                </div>
+                <div class=" form-group row">
+                    <div class="col-md-4">
+                        {{ form_label(sortieForm.duree) }}
+                    </div>
+                    <div class="col-md-8">
+                        {{ form_widget(sortieForm.duree) }}
+                        {{ form_errors(sortieForm.duree) }}
+                    </div>
+                </div>
+                <div class=" form-group row">
+                    <div class="col-md-4">
+                        {{ form_label(sortieForm.description) }}
+                    </div>
+                    <div class="col-md-8">
+                        {{ form_widget(sortieForm.description) }}
+                        {{ form_errors(sortieForm.description) }}
+                    </div>
                 </div>
             </div>
-            <div class=" form-group row">
-                <div class="col-md-4">
-                {{ form_label(sortieForm.dateHeureDebut) }}
-                </div>
-                <div class="col-md-8 row">
+            <div class="col-md-5 ">
+                <div class=" form-group row">
+                    <div class="col-md-5">
+                        {{ form_label(sortieForm.SiteOrga) }}
+                    </div>
                     <div class="col-md-7">
-                        {{ form_widget(sortieForm.dateHeureDebut) }}
-                        {{ form_errors(sortieForm.dateHeureDebut) }}
-                    </div>
-                    <div class="col-md-2">
-                        <img src="{{ asset('images/calendar.png')}}" />
+                        {{ form_widget(sortieForm.SiteOrga) }}
+                        {{ form_errors(sortieForm.SiteOrga) }}
                     </div>
                 </div>
-            </div>
-            <div class=" form-group row">
-                <div class="col-md-4">
-                    {{ form_label(sortieForm.dateLimiteInscription) }}
-                </div>
-                <div class="col-md-8 row">
+                <div class=" form-group row">
+                    <div class="col-md-5">
+                        {{ form_label(sortieForm.ville) }}
+                    </div>
                     <div class="col-md-7">
-                        {{ form_widget(sortieForm.dateLimiteInscription)}}
-                        {{ form_errors(sortieForm.dateLimiteInscription) }}
-                    </div>
-                    <div class="col-md-2">
-                        <img src="{{ asset('images/calendar.png')}}"/>
+                        {{ form_widget(sortieForm.ville) }}
+                        {{ form_errors(sortieForm.ville) }}
                     </div>
                 </div>
-            </div>
-            <div class=" form-group row">
-                <div class="col-md-4">
-                {{ form_label(sortieForm.nbInscriptionMax) }}
-                </div>
-                <div class="col-md-8">
-                {{ form_widget(sortieForm.nbInscriptionMax) }}
-                {{ form_errors(sortieForm.nbInscriptionMax) }}
-                </div>
-            </div>
-            <div class=" form-group row">
-                <div class="col-md-4">
-                {{ form_label(sortieForm.duree) }}
-                </div>
-                <div class="col-md-8">
-                {{ form_widget(sortieForm.duree) }}
-                {{ form_errors(sortieForm.duree) }}
-                </div>
-            </div>
-            <div class=" form-group row">
-                <div class="col-md-4">
-                {{ form_label(sortieForm.description) }}
-                </div>
-                <div class="col-md-8">
-                {{ form_widget(sortieForm.description) }}
-                {{ form_errors(sortieForm.description) }}
-                </div>
-            </div>
-        </div>
-        <div class="col-md-5 ">
-            <div class=" form-group row">
-                <div class="col-md-5">
-                    {{ form_label(sortieForm.SiteOrga) }}
-                </div>
-                <div class="col-md-7">
-                    {{ form_widget(sortieForm.SiteOrga) }}
-                    {{ form_errors(sortieForm.SiteOrga) }}
-                </div>
-            </div>
-            <div class=" form-group row">
-                <div class="col-md-5">
-                    {{ form_label(sortieForm.ville) }}
-                </div>
-                <div class="col-md-7">
-                    {{ form_widget(sortieForm.ville) }}
-                    {{ form_errors(sortieForm.ville) }}
-                </div>
-            </div>
-            <div class=" form-group row">
-                <div class="col-md-5">
-                    {{ form_label(sortieForm.lieu) }}
-                </div>
-                <div class="col-md-7 row">
-                    <div class="col-md-10">
-                        {{ form_widget(sortieForm.lieu) }}
-                        {{ form_errors(sortieForm.lieu) }}
+                <div class=" form-group row">
+                    <div class="col-md-5">
+                        {{ form_label(sortieForm.lieu) }}
                     </div>
-                    <div class="col-md-2">
-                    <a href="{{ url('lieu_ajoute') }}">
-                        <img src="{{ asset('images/plus.png')}}" style="width: 50px"/></a>
+                    <div class="col-md-7 row">
+                        <div class="col-md-10">
+                            {{ form_widget(sortieForm.lieu) }}
+                            {{ form_errors(sortieForm.lieu) }}
+                        </div>
+                        <div class="col-md-2">
+                            <a href="{{ url('lieu_ajoute') }}">
+                                <img src="{{ asset('images/plus.png') }}" style="width: 50px"/></a>
+                        </div>
+                    </div>
+                </div>
+                <div class=" form-group row">
+                    <div class="col-md-5">
+                        {{ form_label(sortieForm.rue) }}
+                    </div>
+                    <div class="col-md-7">
+                        {{ form_widget(sortieForm.rue) }}
+                        {{ form_errors(sortieForm.rue) }}
+                    </div>
+                </div>
+                <div class=" form-group row">
+                    <div class="col-md-5">
+                        {{ form_label(sortieForm.codePostal) }}
+                    </div>
+                    <div class="col-md-7">
+                        {{ form_widget(sortieForm.codePostal) }}
+                        {{ form_errors(sortieForm.codePostal) }}
+                    </div>
+                </div>
+                <div class=" form-group row">
+                    <div class="col-md-5">
+                        {{ form_label(sortieForm.latitude) }}
+                    </div>
+                    <div class="col-md-7">
+                        {{ form_widget(sortieForm.latitude) }}
+                        {{ form_errors(sortieForm.latitude) }}
+                    </div>
+                </div>
+                <div class=" form-group row">
+                    <div class="col-md-5">
+                        {{ form_label(sortieForm.Longitude) }}
+                    </div>
+                    <div class="col-md-7">
+                        {{ form_widget(sortieForm.Longitude) }}
+                        {{ form_errors(sortieForm.Longitude) }}
                     </div>
                 </div>
             </div>
-            <div class=" form-group row">
-                <div class="col-md-5">
-                    {{ form_label(sortieForm.rue) }}
-                </div>
-                <div class="col-md-7">
-                    {{ form_widget(sortieForm.rue) }}
-                    {{ form_errors(sortieForm.rue) }}
-                </div>
-            </div>
-            <div class=" form-group row">
-                <div class="col-md-5">
-                    {{ form_label(sortieForm.codePostal) }}
-                </div>
-                <div class="col-md-7">
-                    {{ form_widget(sortieForm.codePostal) }}
-                    {{ form_errors(sortieForm.codePostal) }}
-                </div>
-            </div>
-            <div class=" form-group row">
-                <div class="col-md-5">
-                    {{ form_label(sortieForm.latitude) }}
-                </div>
-                <div class="col-md-7">
-                    {{ form_widget(sortieForm.latitude) }}
-                    {{ form_errors(sortieForm.latitude) }}
-                </div>
-            </div>
-            <div class=" form-group row">
-                <div class="col-md-5">
-                    {{ form_label(sortieForm.Longitude) }}
-                </div>
-                <div class="col-md-7">
-                    {{ form_widget(sortieForm.Longitude) }}
-                    {{ form_errors(sortieForm.Longitude) }}
-                </div>
-            </div>
-        </div>
-            {{ form_widget(sortieForm) }}
-    </div>
-    <div class="row justify-content-md-center">
-        <div class="col-md-2">
-            <button type="submit" class="btn-lg  btn-dark btn-block" > Enregister</button>
-        </div>
-        <div class="col-md-2">
-            <button type="submit" class="btn-lg  btn-dark btn-block" > Publier</button>
-        </div>
-        <div class="col-md-2">
-            <a class="btn btn-lg  btn-dark btn-block" href="{{url('sortie_accueil')  }}" role="button">
-                Annuler
-            </a>
-        </div>
 
-    </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-md-2">
+                {{ form_widget(sortieForm.enregistrer) }}
+
+            </div>
+            <div class="col-md-2">
+                {{ form_widget(sortieForm.publier) }}
+            </div>
+            <div class="col-md-2">
+                <a class="btn btn-lg  btn-dark btn-block" href="{{ url('sortie_accueil') }}" role="button">
+                    Annuler
+                </a>
+            </div>
+
+        </div>
+        {{ form_widget(sortieForm) }}
         {{ form_end(sortieForm) }}
 
-</div>
+    </div>
 {% endblock %}

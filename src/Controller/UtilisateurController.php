@@ -19,13 +19,11 @@ class UtilisateurController extends AbstractController
 {
 
 
-
     /**
      * @route("/login", name="user_login")
      */
     public function login(AuthenticationUtils $utils): Response
     {
-
         return $this->render("utilisateur/login.html.twig", [
             'loginError' => $utils->getLastAuthenticationError(),
             'loginUsername' => $utils->getLastUsername(),
@@ -38,11 +36,9 @@ class UtilisateurController extends AbstractController
      */
     public function logout()
     {
-      $user = $this->getUser();
+        $user = $this->getUser();
         return $this->render('utilisateur/login.html.twig', [
-
-           'user'=> $user,
-
+            'user' => $user,
         ]);
     }
 
@@ -57,7 +53,9 @@ class UtilisateurController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManager,
         UserPasswordEncoderInterface $encoder,
-    ): Response {
+    ): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $utilisateur = new Utilisateur;
         $registrationForm = $this->createForm(RegistrationType::class, $utilisateur);
         $registrationForm->handleRequest($request);
@@ -66,7 +64,7 @@ class UtilisateurController extends AbstractController
             $utilisateur->setPassword($encoder->encodePassword($utilisateur, $utilisateur->getPassword()));
             $entityManager->persist($utilisateur);
             $entityManager->flush();
-            $this->addFlash('success', 'Inscription réussie');
+            $this->addFlash('success', 'Inscription rÃ©ussie');
             return $this->redirectToRoute('user_login');
         }
 
@@ -81,43 +79,36 @@ class UtilisateurController extends AbstractController
      */
     public function gestionUtilisateur(int $id, Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $encoder)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
         $utilisateur = new Utilisateur();
         $repository = $em->getRepository(Utilisateur::class);
         $utilisateur = $repository->findOneBy(['id' => $id]);
-
         $utilisateurForm = $this->createForm(UtilisateurType::class, $utilisateur);
         $utilisateurForm->handleRequest($request);
 
 
         if ($utilisateurForm->isSubmitted()) {
-            // On récupère les images transmises
             $images = $utilisateurForm->get('images')->getData();
-            // On boucle sur les images
-            foreach($images as $image) {
-                $fichier = md5(uniqid()).'.'.$image->guessExtension();
-
-                // On copie le fichier dans le dossier uploads
+            foreach ($images as $image) {
+                $fichier = md5(uniqid()) . '.' . $image->guessExtension();
                 $image->move(
                     $this->getParameter('images_directory'),
                     $fichier
                 );
-                // On stocke l'image dans la base de données (nom)
                 $img = new Images();
                 $img->setName($fichier);
                 $utilisateur->addImage($img);
             }
             $utilisateur->setPassword($encoder->encodePassword($utilisateur, $utilisateur->getPassword()));
-            // $utilisateur->setAdmin($utilisateur->setAdmin(app.$utilisateur));
-
             $em->persist($utilisateur);
             $em->flush();
-            $this->addFlash('success', 'Le profil a bien été modifié');
+            $this->addFlash('success', 'Le profil a bien Ã©tÃ© modifiÃ©');
             return $this->redirectToRoute('sortie_accueil');
         }
         return $this->render('utilisateur/gestion.html.twig', [
             "utilisateurForm" => $utilisateurForm->createView(),
-            'user'=>$user,
+            'user' => $user,
         ]);
     }
 
@@ -127,15 +118,14 @@ class UtilisateurController extends AbstractController
      */
     public function afficher(int $id, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
         $utilisateur = $this->getDoctrine()->getRepository(Utilisateur::class)->find($id);
-
-
         return $this->render('utilisateur/afficher.html.twig', [
             'utilisateur' => $utilisateur,
-            'user'=>$user,
+            'user' => $user,
         ]);
 
     }
-    }
+}
 

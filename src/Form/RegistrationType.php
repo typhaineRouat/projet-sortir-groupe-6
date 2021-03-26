@@ -19,16 +19,15 @@ class RegistrationType extends AbstractType
             ->add('prenom')
             ->add('username')
             ->add('telephone')
-            ->add('email', EmailType::class, [ 'label' => 'Adresse email'])
+            ->add('email', EmailType::class, ['label' => 'Adresse email'])
             ->add('password', RepeatedType::class, [
-                'type'            => PasswordType::class,
+                'type' => PasswordType::class,
                 'invalid_message' => 'La confirmation du mot de passe est fausse',
-                'required'        => true,
-                'first_options'   => [ 'label' => 'Mot de passe' ],
-                'second_options'  => [ 'label' => 'Confirmation' ],
+                'required' => true,
+                'first_options' => ['label' => 'Mot de passe'],
+                'second_options' => ['label' => 'Confirmation'],
             ])
-            ->add('admin')
-        ;
+            ->add('admin');
     }
 
     public function configureOptions(OptionsResolver $resolver)

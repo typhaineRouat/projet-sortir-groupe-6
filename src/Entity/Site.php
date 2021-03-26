@@ -10,7 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Site
 {
-    public function __toString():string{
+    public function __toString(): string
+    {
         return $this->getNom();
     }
 
@@ -76,7 +77,7 @@ class Site
     }
 
 
-    public function setUtilisateurs( $utilisateurs)
+    public function setUtilisateurs($utilisateurs)
     {
         $this->utilisateurs = $utilisateurs;
         return $this;

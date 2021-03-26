@@ -11,9 +11,11 @@ use Doctrine\ORM\Mapping as ORM;
 class Lieu
 {
 
-    public function __toString():string{
+    public function __toString(): string
+    {
         return $this->getNom();
     }
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

@@ -17,10 +17,12 @@ class LieuController extends AbstractController
      */
     public function ajoute(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $lieu = new Lieu();
-        $lieuForm = $this->createForm(LieuType::class,$lieu);
-        $lieuForm ->handleRequest($request);
-        if($lieuForm->isSubmitted() && $lieuForm->isValid()){
+        $lieuForm = $this->createForm(LieuType::class, $lieu);
+        $lieuForm->handleRequest($request);
+        if ($lieuForm->isSubmitted() && $lieuForm->isValid()) {
 
             $entityManager->persist($lieu);
             $entityManager->flush();
@@ -30,6 +32,7 @@ class LieuController extends AbstractController
         return $this->render('lieu/ajoute.html.twig', [
             'controller_name' => 'LieuController',
             'lieuForm' => $lieuForm->createView(),
+            'user' => $user,
         ]);
     }
 }

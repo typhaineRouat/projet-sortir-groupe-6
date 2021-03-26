@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entity;
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use App\Repository\SortieRepository;
@@ -36,7 +37,7 @@ class Sortie
 
     /**
      *
-     * @ORM\ManyToMany (targetEntity="App\Entity\Utilisateur", mappedBy="sortiesUtilisateurs")
+     * @ORM\ManyToMany (targetEntity="App\Entity\Utilisateur", mappedBy="sortiesUtilisateurs", cascade={"persist"})
      */
     private $participants;
 
@@ -204,38 +205,37 @@ class Sortie
         $this->participants = new ArrayCollection();
     }
 
-    /**
-     * @return Collection|Utilisateur[]
-     */
-    public function getParticipants():Collection
+
+    public function getParticipants()
     {
         return $this->participants;
     }
 
-    /**
-     * @param ArrayCollection $participants
-     *
-     */
+
     public function setParticipants($participants)
     {
         $this->participants = $participants;
         return $this;
     }
 
-    public function addParticipant(Utilisateur $participant):self
+    public function addParticipant($participant)
     {
-        if(!$this->participants->contains($participant)){
+
+        if (!$this->participants->contains($participant)) {
             $this->participants[] = $participant;
             $participant->addSort($this);
         }
+
         return $this;
     }
-    public function removeParticipant(Utilisateur $participant):self
+
+    public function removeParticipant($participant)
     {
-        if(!$this->participants->contains($participant)){
-            $this->participants ->removeElement($participant);
-            $participant-> removeSort($this);
+        if ($this->participants->contains($participant)) {
+            $this->participants->removeElement($participant);
+            $participant->removeSort($this);
         }
+
         return $this;
     }
 

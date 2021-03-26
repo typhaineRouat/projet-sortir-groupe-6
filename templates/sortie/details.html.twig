@@ -4,43 +4,43 @@
     <div class="row justify-content-md-center">
         <h1> Afficher une sortie</h1>
     </div>
-{% endblock%}
+{% endblock %}
 {% block main %}
     <div class="row justify-content-md-center ">
         <div class="row col-md-11 ">
             <div class="col-md-6">
                 <table class="table">
-                    <tr >
+                    <tr>
                         <th>Nom de la sortie :</th>
-                        <td>{{ sortie.getNom()}}</td>
+                        <td>{{ sortie.getNom() }}</td>
                     </tr>
                     <tr>
                         <th>Date et heure de la sortie :</th>
-                        <td>{{ sortie.getDateHeureDebut()|date('d-m-Y à H:i' )}}</td>
+                        <td>{{ sortie.getDateHeureDebut()|date('d-m-Y à H:i' ) }}</td>
                     </tr>
                     <tr>
                         <th>Date limite d'inscrition :</th>
-                        <td>{{ sortie.getDateLimiteInscription()|date('d-m-Y ' )}}</td>
+                        <td>{{ sortie.getDateLimiteInscription()|date('d-m-Y ' ) }}</td>
                     </tr>
                     <tr>
                         <th>Nombre de places :</th>
-                        <td>{{ sortie.getNbInscriptionMax()}}</td>
+                        <td>{{ sortie.getNbInscriptionMax() }}</td>
                     </tr>
                     <tr>
                         <th>Durée :</th>
-                        <td>{{ sortie.getDuree()}}</td>
+                        <td>{{ sortie.getDuree() }}</td>
                     </tr>
                     <tr>
                         <th>Description et infos :</th>
-                        <td>{{ sortie.getDescription()}}</td>
+                        <td>{{ sortie.getDescription() }}</td>
                     </tr>
                 </table>
             </div>
             <div class="col-md-6">
                 <table class="table">
-                    <tr >
+                    <tr>
                         <th>Ville organisatrice :</th>
-                        <td>{{ sortie.getSiteOrga}}</td>
+                        <td>{{ sortie.getSiteOrga }}</td>
                     </tr>
                     <tr>
                         <th>Lieu :</th>
@@ -48,22 +48,22 @@
                     </tr>
                     <tr>
                         <th>Rue :</th>
-                        <td>{{ sortie.lieu.getRue()}}</td>
+                        <td>{{ sortie.lieu.getRue() }}</td>
                     </tr>
                     <tr>
                         <th>Code postal :</th>
-                        <td>{{ sortie.lieu.ville.getCodePostal()}}</td>
+                        <td>{{ sortie.lieu.ville.getCodePostal() }}</td>
                     </tr>
-                    <tr >
+                    <tr>
                         <th>Ville :</th>
-                        <td>{{ sortie.lieu.ville.getNom()}}</td>
+                        <td>{{ sortie.lieu.ville.getNom() }}</td>
                     </tr>
                     <tr>
                         <th>Latitude :</th>
-                        <td>{{ sortie.lieu.getLatitude()}} </td>
+                        <td>{{ sortie.lieu.getLatitude() }} </td>
                     <tr>
                         <th>Longitude :</th>
-                        <td>{{ sortie.lieu.getLongitude()}}</td>
+                        <td>{{ sortie.lieu.getLongitude() }}</td>
                     </tr>
                     </tr>
                 </table>
@@ -85,8 +85,8 @@
 
                 {% for participant in sortie.getParticipants() %}
                     <tr>
-                        <th scope="row">{{loop.index}}</th>
-                        <td>{{ participant.username}}</td>
+                        <th scope="row">{{ loop.index }}</th>
+                        <td>{{ participant.username }}</td>
                         <td>{{ participant.nom }}</td>
                     </tr>
                 {% endfor %}
@@ -94,10 +94,15 @@
                 </tbody>
             </table>
         </div>
-        <div class="row justify-content-md-center col-md-3">
-            <a class="btn btn-lg  btn-dark btn-block" href="{{ url('sortie_modifier',{'id':sortie.id}) }}" role="button">
-                Modifier cette sortie
-            </a>
-        </div>
+
+        {% if app.user.id == sortie.getOrganisateur().getId() %}
+
+            <div class="row justify-content-md-center col-md-3">
+                <a class="btn btn-lg  btn-dark btn-block" href="{{ url('sortie_modifier',{'id':sortie.id}) }}"
+                   role="button">
+                    Modifier cette sortie
+                </a>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}

@@ -10,9 +10,11 @@ use App\Entity\Ville;
 use App\Repository\LieuRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,129 +25,138 @@ class SortieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom',TextType::class,[
-                'label'=>'Nom de la sortie :',
-                'required'=>true,
-                'attr'=>[
-                    'class'=> 'form-control col-md-8',
+            ->add('nom', TextType::class, [
+                'label' => 'Nom de la sortie :',
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-control col-md-8',
                 ],
             ])
-            ->add('dateHeureDebut',DateTimeType::class,[
-                'label'=>'Date et heure de la sortie :',
+            ->add('dateHeureDebut', DateTimeType::class, [
+                'label' => 'Date et heure de la sortie (aaaa-mm-jj hh:mm):',
                 'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd HH:mm',
                 'html5' => false,
-                'format'=>'yyyy-MM-dd HH:mm',
-                'required'=>true,
-                'attr'=>[
-                    'class'=> 'form-control js-datepicker',
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control js-datepicker',
                 ],
             ])
-
-            ->add('dateLimiteInscription',DateType::class,[
-               'label'=>'Date limite d inscription :',
+            ->add('dateLimiteInscription', DateType::class, [
+                'label' => 'Date limite d inscription :',
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
-               'required'=>true,
-                'attr'=>[
-                    'class'=> 'form-control',
-                ],
-           ])
-            ->add('nbInscriptionMax',IntegerType::class,[
-                'label'=>'Nombre de place :',
-                'required'=>true,
-                'attr'=>[
-                    'class'=> 'form-control col-md-8',
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-control',
                 ],
             ])
-            ->add('duree',IntegerType::class,[
-                'label'=>'Durée :',
-                'required'=>true,
-                'attr'=>[
-                    'class'=> 'form-control col-md-8',
+            ->add('nbInscriptionMax', IntegerType::class, [
+                'label' => 'Nombre de place :',
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-control col-md-8',
                 ],
             ])
-            ->add('description',TextareaType::class,[
-                'label'=>'Description et infos :',
-                'required'=>true,
-                'attr'=>[
-                    'class'=> 'form-control col-md-8',
+            ->add('duree', IntegerType::class, [
+                'label' => 'Durée :',
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-control col-md-8',
+                ],
+            ])
+            ->add('description', TextareaType::class, [
+                'label' => 'Description et infos :',
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-control col-md-8',
                 ],
             ])
             //->add('organisateur')
-            ->add('SiteOrga',EntityType::class,[
-                'class'=>Site::class,
-                'choice_label'=>'nom',
-                'label'=>'Ville organisatrice :',
-                'required'=>true,
-                'attr'=>[
-                    'class'=> 'form-control',
-                ],
-            ])
-            ->add('ville',EntityType::class,[
-                'mapped' => false,
-                'class'=>Ville::class,
-                'choice_label'=>'nom',
-                'label'=>'Ville :',
-                'required'=>true,
-                'attr'=>[
-                    'class'=> 'form-control',
-                ],
-                ])
-
-            ->add('lieu',EntityType::class,[
-
-                'class'=>Lieu::class,
+            ->add('SiteOrga', EntityType::class, [
+                'class' => Site::class,
                 'choice_label' => 'nom',
-                'label'=>'Lieu :',
-                'required'=>true,
-                'attr'=>[
-                    'class'=> 'form-control',
+                'label' => 'Ville organisatrice :',
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-control',
                 ],
             ])
-            ->add('rue',EntityType::class,[
+            ->add('ville', EntityType::class, [
                 'mapped' => false,
-                'class'=>Lieu::class,
+                'class' => Ville::class,
+                'choice_label' => 'nom',
+                'label' => 'Ville :',
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
+            ->add('lieu', EntityType::class, [
+
+                'class' => Lieu::class,
+                'choice_label' => 'nom',
+                'label' => 'Lieu :',
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
+            ->add('rue', EntityType::class, [
+                'mapped' => false,
+                'class' => Lieu::class,
                 'choice_label' => 'rue',
-                'label'=>'Rue :',
-                'required'=>true,
-                'attr'=>[
-                    'class'=> 'form-control',
+                'label' => 'Rue :',
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-control',
                 ],
             ])
-            ->add('codePostal',EntityType::class,[
+            ->add('codePostal', EntityType::class, [
                 'mapped' => false,
-                'class'=>Ville::class,
+                'class' => Ville::class,
                 'choice_label' => 'codePostal',
-                'label'=>'Code postal :',
-                'required'=>true,
-                'attr'=>[
-                    'class'=> 'form-control',
+                'label' => 'Code postal :',
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-control',
                 ],
             ])
-            ->add('latitude',EntityType::class,[
+            ->add('latitude', EntityType::class, [
                 'mapped' => false,
-                'class'=>Lieu::class,
+                'class' => Lieu::class,
                 'choice_label' => 'latitude',
-                'label'=>'latitude :',
-                'required'=>true,
-                'attr'=>[
-                    'class'=> 'form-control',
+                'label' => 'latitude :',
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-control',
                 ],
             ])
-            ->add('Longitude',EntityType::class,[
+            ->add('Longitude', EntityType::class, [
                 'mapped' => false,
-                'class'=>Lieu::class,
+                'class' => Lieu::class,
                 'choice_label' => 'longitude',
-                'label'=>'Longitude :',
-                'required'=>true,
-                'attr'=>[
-                    'class'=> 'form-control',
+                'label' => 'Longitude :',
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
+            ->add('enregistrer', SubmitType::class, [
+                'label' => 'Enregistrer',
+                'attr' => [
+                    'class' => 'btn-lg  btn-dark btn-block',
+                ],
+            ])
+            ->add('publier', SubmitType::class, [
+                'label' => 'Publier',
+                'attr' => [
+                    'class' => 'btn-lg  btn-dark btn-block',
                 ],
             ])
 
-
-           // ->add('participants')
-           // ->add('etat')
+            // ->add('participants')
+            // ->add('etat')
         ;
     }
 

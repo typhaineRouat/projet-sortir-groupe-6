@@ -24,7 +24,6 @@ class Images
 
     /**
      * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="images")
-
      */
     private $utilisateur;
 

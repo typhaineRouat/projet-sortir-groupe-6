@@ -3,7 +3,7 @@
 
 
     {% block main %}
-        <div class="container ">
+        <div class="container participantbox ">
 
             <div class="col-md row justify-content-end">
 
@@ -12,7 +12,7 @@
             </div>
         </div>
 
-        <div class="container ">
+        <div class="container participantbox">
             <div class="col-md row justify-content-end">
 
                 {% if app.user %}
@@ -87,7 +87,6 @@
 
                             {% for sortie in sorties %}
                                 {% if sortie.getDateHeureDebut()> dateArchive %}
-
                                     <tr>
                                         <td>{{ sortie.getNom() }} </td>
                                         <td>{{ sortie.getDateHeureDebut()|date('d-m-Y à H:i') }} </td>
@@ -106,10 +105,30 @@
                                         <td>
                                             <a href="{{ url('utilisateur_afficher', { 'id' : sortie.getOrganisateur().getId()}) }}"
                                                class="Link nav-link">{{ sortie.getOrganisateur() }}</a>
-
                                         </td>
-                                        <td> à faire</td>
+                                        <td>
+                                            <a href={{ url('sortie_details', { 'id' : sortie.id}) }}>Afficher</a>
 
+                                            {% for participant in sortie.participants %}
+                                                {% if app.user != sortie.organisateur and dateDuJOur<sortie.getDateLimiteInscription() %}
+                                                    {% if app.user.id == participant.id %}
+                                                        <a href="{{ url('desistement_utilisateur', { 'id' : sortie.id}) }}">Se désister</a>
+                                                    {% elseif sortie.participants|length < sortie.getNbInscriptionMax() and app.user not in sortie.participants %}
+                                                        <a href="{{ url('inscrire_utilisateur', { 'id' : sortie.id}) }}">S'inscrire</a>
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endfor %}
+
+                                            {% if sortie.participants is empty and app.user != sortie.organisateur  and sortie.etat.getId() == 2
+                                                and dateDuJOur<sortie.getDateLimiteInscription() %}
+
+                                                <a href="{{ url('inscrire_utilisateur', { 'id' : sortie.id}) }}">S'inscrire</a>
+
+                                            {% elseif app.user == sortie.organisateur %}
+                                                <a href="{{ url('sortie_modifier', { 'id' : sortie.id}) }}">Modifier</a>
+                                                <a href="{{ url('sortie_annuler', { 'id' : sortie.id}) }}">Annuler</a>
+                                            {% endif %}
+                                        </td>
                                     </tr>
                                 {% endif %}
                             {% endfor %}

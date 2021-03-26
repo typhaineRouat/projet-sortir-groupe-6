@@ -13,7 +13,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class Utilisateur implements UserInterface
 {
-    public function __toString():string{
+    public function __toString(): string
+    {
         return $this->getNom();
     }
 
@@ -26,7 +27,7 @@ class Utilisateur implements UserInterface
 
     /**
      *
-     * @ORM\ManyToMany (targetEntity="App\Entity\Sortie", inversedBy="participants")
+     * @ORM\ManyToMany (targetEntity="App\Entity\Sortie", inversedBy="participants", cascade={"persist"})
      */
     private $sortiesUtilisateurs;
 
@@ -85,9 +86,9 @@ class Utilisateur implements UserInterface
     /**
      * @ORM\Column(type="json")
      */
-    private  $roles;
+    private $roles;
 
-     /**
+    /**
      * @ORM\OneToMany(targetEntity=Images::class, mappedBy="utilisateur", orphanRemoval=true, cascade={"persist"})
      */
     private $images;
@@ -97,7 +98,7 @@ class Utilisateur implements UserInterface
         return $this->id;
     }
 
-    public function getUsername() : ?string
+    public function getUsername(): ?string
     {
         return $this->username;
     }
@@ -110,7 +111,7 @@ class Utilisateur implements UserInterface
         $this->username = $username;
     }
 
-    public function getPassword() : ?string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
@@ -147,7 +148,7 @@ class Utilisateur implements UserInterface
         return $this;
     }
 
-  
+
     public function getTelephone(): ?string
     {
         return $this->telephone;
@@ -223,7 +224,7 @@ class Utilisateur implements UserInterface
         return $this;
     }
 
-    public function getRoles() :iterable
+    public function getRoles(): iterable
     {
         return $this->roles;
     }
@@ -235,7 +236,7 @@ class Utilisateur implements UserInterface
 
     public function __construct()
     {
-        $this->roles = [ 'ROLE_USER' ];
+        $this->roles = ['ROLE_USER'];
         $this->images = new ArrayCollection();
     }
 
@@ -244,42 +245,7 @@ class Utilisateur implements UserInterface
         // $this->password = '';
         return null;
     }
-   //public function __construct()
-   // {
-    //    $this->sortiesUtilisateurs = new ArrayCollection();
-   // }
-    /**
-     * @return Collection | Sortie[]
-     */
-    public function getSortiesUtilisateurs(): Collection
-    {
-        return $this->sortiesUtilisateurs;
-    }
 
-    public function addSort(Sortie $sort):self
-    {
-        if(!$this->sortiesUtilisateurs->contains($sort)){
-            $this->sortiesUtilisateurs[] = $sort;
-        }
-        return $this;
-    }
-    public function removeSort(Sortie $sort):self
-    {
-        if(!$this->sortiesUtilisateurs->contains($sort)){
-            $this->sortiesUtilisateurs->removeElement($sort) ;
-        }
-        return $this;
-    }
-
-    /**
-     * @param ArrayCollection $sortiesUtilisateurs
-     * @return Utilisateur
-     */
-    public function setSortiesUtilisateurs(ArrayCollection $sortiesUtilisateurs): Utilisateur
-    {
-        $this->sortiesUtilisateurs = $sortiesUtilisateurs;
-        return $this;
-    }
 
     /**
      * @return Collection|Images[]
@@ -310,5 +276,34 @@ class Utilisateur implements UserInterface
 
         return $this;
     }
+
+    public function addSort($sort)
+    {
+        if (!$this->sortiesUtilisateurs->contains($sort)) {
+            $this->sortiesUtilisateurs[] = $sort;
+        }
+        return $this;
+    }
+
+    public function removeSort($sort)
+    {
+        if ($this->sortiesUtilisateurs->contains($sort)) {
+            $this->sortiesUtilisateurs->removeElement($sort);
+
+        }
+        return $this;
+    }
+
+    public function getSortiesUtilisateurs()
+    {
+        return $this->sortiesUtilisateurs;
+    }
+
+    public function setSortiesUtilisateurs($sortiesUtilisateurs)
+    {
+        $this->sortiesUtilisateurs = $sortiesUtilisateurs;
+        return $this;
+    }
+
 
 }

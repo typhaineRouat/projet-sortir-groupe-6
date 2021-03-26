@@ -34,21 +34,18 @@ class UtilisateurType extends AbstractType
                 'first_options' => ['label' => 'Mot de passe'],
                 'second_options' => ['label' => 'Confirmation'],
             ])
-
             ->add('site', EntityType::class, [
                 'class' => Site::class,
                 'choice_label' => 'nom',
                 'label' => 'Site',
                 'required' => false
             ])
-
             ->add('images', FileType::class, [
                 'label' => false,
-                'multiple' =>true,
+                'multiple' => true,
                 'mapped' => false,
                 'required' => false
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
